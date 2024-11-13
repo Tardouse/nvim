@@ -64,6 +64,7 @@ M.config = {
 					"biome",
 					"cssls",
 					'ts_ls',
+					'lua_ls',
 					'eslint',
 					'jsonls',
 					'html',

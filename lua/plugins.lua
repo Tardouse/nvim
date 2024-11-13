@@ -19,6 +19,7 @@ require("lazy").setup({
 	-- require("plugins.telescope"),
 	require("plugins.fzf"),
 	require("plugins.colorscheme"),
+	require("plugins.transparent"),
 	require("plugins.vimlayouts"),
 	require("plugins.tabline"),
 	require("plugins.undo"),
