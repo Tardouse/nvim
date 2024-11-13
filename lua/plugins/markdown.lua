@@ -18,12 +18,8 @@ return {
 					execute "silent ! google-chrome-stable " . a:url
 				endfunction
 				function! OpenMarkdownPreviewDarwin(url)
-					if a:url =~ '^file://'
-						let l:local_url = substitute(a:url, '^file://', '', '')
-						execute 'silent !open -a Google\ Chrome -n --args ' . l:local_url
-					else
-						execute 'silent !open -a Google\ Chrome -n --args ' . a:url
-					endif
+					let l:local_url = substitute(a:url, '^file://', '', '')
+					execute 'silent !open -a Google\ Chrome -n --args ' . l:local_url
 				endfunction
 			]])
 
@@ -35,7 +31,11 @@ return {
 					vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 				end
 			elseif sysname == 'Darwin' then
-				vim.g.mkdp_browserfunc = 'OpenMarkdownPreviewDarwin'
+				if vim.env.SSH_CONNECTION then
+					vim.g.mkdp_browserfunc = 'EchoUrl'
+				else
+					vim.g.mkdp_browserfunc = 'OpenMarkdownPreviewDarwin'
+				end
 			end
 		end,
 		ft = { "markdown" },
