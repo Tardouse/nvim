@@ -1,2 +1,2 @@
 # Nvim Config
-This repo is my neovim config
+This repo is my neovim config.
