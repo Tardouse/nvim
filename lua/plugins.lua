@@ -45,4 +45,5 @@ require("lazy").setup({
 	require("plugins.multi-cursor"),
 	require("plugins.yazi"),
 	require("plugins.copilot"),
+	require("plugins.fun"),
 })
