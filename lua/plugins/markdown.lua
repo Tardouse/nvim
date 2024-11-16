@@ -41,7 +41,7 @@ return {
 		ft = { "markdown" },
 		config = function()
 			-- Define key mappings
-			vim.api.nvim_set_keymap('n', 'tm', ':MarkdownPreviewToggle<CR>', { noremap = true })
+			vim.api.nvim_set_keymap('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { noremap = true })
 		end
 	},
 	{
@@ -50,7 +50,7 @@ return {
 		ft = { "markdown" },
 		config = function()
 			vim.cmd [[
-                nnoremap tt :TableModeToggle<CR>
+                nnoremap <leader>mt :TableModeToggle<CR>
             ]]
 		end
 	},
