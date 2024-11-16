@@ -7,16 +7,17 @@ M.config = {
 		-- dir = "/Users/david/.config/nvim/_local_plugins/telescope.nvim",
 		-- tag = '0.1.1',
 		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 			"nvim-lua/plenary.nvim",
-			{
-				"LukasPietzschmann/telescope-tabs",
-				config = function()
-					local tstabs = require('telescope-tabs')
-					tstabs.setup({
-					})
-					vim.keymap.set('n', '<c-t>', tstabs.list_tabs, {})
-				end
-			},
+			-- {
+			-- 	"LukasPietzschmann/telescope-tabs",
+			-- 	config = function()
+			-- 		local tstabs = require('telescope-tabs')
+			-- 		tstabs.setup({
+			-- 		})
+			-- 		vim.keymap.set('n', '<leader>tt', tstabs.list_tabs, {})
+			-- 	end
+			-- },
 			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 			-- "nvim-telescope/telescope-ui-select.nvim",
 			'stevearc/dressing.nvim',
@@ -24,25 +25,48 @@ M.config = {
 		},
 		config = function()
 			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<c-p>', builtin.find_files, m)
-			-- vim.keymap.set('n', '<c-f>', function()
-			-- 	builtin.grep_string({ search = "" })
-			-- end, m)
+			vim.keymap.set('n', '<leader>tf', builtin.find_files, m)
 			vim.keymap.set('n', '<leader>rs', builtin.resume, m)
-			vim.keymap.set('n', '<c-w>', builtin.buffers, m)
-			vim.keymap.set('n', '<c-h>', builtin.oldfiles, m)
-			vim.keymap.set('n', '<c-_>', builtin.current_buffer_fuzzy_find, m)
-			vim.keymap.set('n', 'z=', builtin.spell_suggest, m)
+			vim.keymap.set('n', '<leader>tb', builtin.buffers, m)
+			vim.keymap.set('n', '<leader>to', builtin.oldfiles, m)
+			vim.keymap.set('n', '<leader>tz', builtin.current_buffer_fuzzy_find, m)
+			vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, m)
 
-			vim.keymap.set('n', '<leader>d', function()
+			vim.keymap.set('n', '<leader>td', function()
 				builtin.diagnostics({
 					sort_by = "severity"
 				})
 			end, m)
+
+			vim.lsp.protocol.DiagnosticSeverity = {
+				"Error",
+				"Warning",
+				"Information",
+				"Hint",
+				Error = 1,
+				Hint = 4,
+				Information = 3,
+				Warning = 2
+			}
+
+			vim.diagnostic.severity = {
+				"ERROR",
+				"WARN",
+				"INFO",
+				"HINT",
+				E = 1,
+				ERROR = 1,
+				HINT = 4,
+				I = 3,
+				INFO = 3,
+				N = 4,
+				W = 2,
+				WARN = 2
+			}
 			-- vim.keymap.set('n', 'gd', builtin.lsp_definitions, m)
 			-- vim.keymap.set('n', '<c-t>', builtin.lsp_document_symbols, {})
-			vim.keymap.set('n', 'gi', builtin.git_status, m)
-			vim.keymap.set("n", ":", builtin.commands, m)
+			vim.keymap.set('n', '<leader>tg', builtin.git_status, m)
+			vim.keymap.set("n", "<leader>t.", builtin.commands, m)
 
 			local trouble = require("trouble.providers.telescope")
 
@@ -75,11 +99,11 @@ M.config = {
 					mappings = {
 						i = {
 							["<C-h>"] = "which_key",
-							["<C-u>"] = "move_selection_previous",
-							["<C-e>"] = "move_selection_next",
-							["<C-l>"] = "preview_scrolling_up",
-							["<C-y>"] = "preview_scrolling_down",
-							["<esc>"] = "close",
+							["<C-k>"] = "move_selection_previous",
+							["<C-j>"] = "move_selection_next",
+							["<C-f>"] = "preview_scrolling_up",
+							["<C-b>"] = "preview_scrolling_down",
+							-- ["<esc>"] = "close",
 							["<C-n>"] = require('telescope.actions').cycle_history_next,
 							["<C-p>"] = require('telescope.actions').cycle_history_prev,
 						}
@@ -127,7 +151,6 @@ M.config = {
 
 			ts.load_extension('neoclip')
 			ts.load_extension('dap')
-			ts.load_extension('telescope-tabs')
 			ts.load_extension('fzf')
 			ts.load_extension('simulators')
 
@@ -136,8 +159,8 @@ M.config = {
 				apple_simulator = true,
 			})
 			-- ts.load_extension("ui-select")
-			ts.load_extension("flutter")
-			local tsdap = ts.extensions.dap;
+			-- ts.load_extension("flutter")
+			-- local tsdap = ts.extensions.dap;
 			-- vim.keymap.set("n", "<leader>'v", tsdap.variables, m)
 			-- vim.keymap.set("n", "<leader>'a", tsdap.commands, m)
 			-- vim.keymap.set("n", "<leader>'b", tsdap.list_breakpoints, m)

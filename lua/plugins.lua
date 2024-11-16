@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	-- require("plugins.telescope"),
+	require("plugins.telescope").config,
 	require("plugins.fzf"),
 	require("plugins.colorscheme"),
 	require("plugins.transparent"),
