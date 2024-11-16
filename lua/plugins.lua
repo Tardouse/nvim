@@ -44,6 +44,7 @@ require("lazy").setup({
 	require("plugins.window-management"),
 	require("plugins.multi-cursor"),
 	require("plugins.yazi"),
+	-- require("plugins.ranger"),
 	require("plugins.copilot"),
 	require("plugins.fun"),
 })
