@@ -220,7 +220,7 @@ M.configfunc = function()
 					end
 				end
 			}),
-			["<Tab>"] = cmp.mapping({
+			["<c-j>"] = cmp.mapping({
 				i = function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
@@ -233,7 +233,7 @@ M.configfunc = function()
 					end
 				end,
 			}),
-			["<S-Tab>"] = cmp.mapping({
+			["<c-k>"] = cmp.mapping({
 				i = function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
