@@ -46,18 +46,14 @@ return {
 	},
 	{
 		"dhruvasagar/vim-table-mode",
-		cmd = { "TableModeToggle", "TableModeEnable", "TableModeDisable" },
 		ft = { "markdown" },
 		config = function()
-			vim.cmd [[
-                nnoremap <leader>mt :TableModeToggle<CR>
-            ]]
+			vim.api.nvim_set_keymap('n', '<leader>mt', ':TableModeToggle<CR>', { noremap = true })
 		end
 	},
 	{
 		'mzlogin/vim-markdown-toc',
 		ft = { "markdown" },
-		cmd = { "GenTocGFM" },
 		config = function()
 			-- auto update toc on save
 			vim.g.vmt_auto_update_on_save = 1
