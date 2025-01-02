@@ -150,7 +150,7 @@ M.config = {
 			})
 
 			ts.load_extension('neoclip')
-			ts.load_extension('dap')
+			-- ts.load_extension('dap')
 			ts.load_extension('fzf')
 			ts.load_extension('simulators')
 
