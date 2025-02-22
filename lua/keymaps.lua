@@ -1,19 +1,22 @@
 vim.g.mapleader = " "
 
 local nmappings = {
+	-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+	{ from = "<Esc>", to = "<cmd>nohlsearch<CR>" }, -- clear search
+
 	-- print some info
-	{from = "\\p", to = ":lua print(vim.fn.expand('%:p'))<CR>"}, -- print full path of current file
-	
+	{ from = "\\p",   to = ":lua print(vim.fn.expand('%:p'))<CR>" }, -- print full path of current file
+
 	-- some layouts/function open
-	{ from = "<C-t>",      to = ":NERDTreeToggle<CR>" },
+	{ from = "<C-t>", to = ":NERDTreeToggle<CR>" },
 
 	-- Regular Configration
-	{ from = "<C-j>",      to = ":set paste<CR>o<Esc>:set nopaste<CR>" },
+	{ from = "<C-j>", to = ":set paste<CR>o<Esc>:set nopaste<CR>" },
 
 	-- buffers management
-	{ from = "tp",         to = ":bprevious<CR>", },
-	{ from = "tn",         to = ":bnext<CR>", },
-	{ from = "td",         to = ":bdelete<CR>", },
+	{ from = "tp",    to = ":bprevious<CR>", },
+	{ from = "tn",    to = ":bnext<CR>", },
+	{ from = "td",    to = ":bdelete<CR>", },
 
 	-- Tab management
 	-- { from = "tu",            to = ":tabe<CR>", },
