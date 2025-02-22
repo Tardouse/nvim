@@ -6,7 +6,7 @@ return {
 			vim.g.translator_default_from = "auto"
 			vim.g.translator_default_to = "zh"
 
-			-- 设置快捷键 <leader>sz 用于翻译
+			-- 设置快捷键 <leader>sw 用于翻译
 			vim.api.nvim_set_keymap('n', '<leader>sw', ':TranslateW<CR>', { noremap = true, silent = true })
 			vim.api.nvim_set_keymap('v', '<leader>sw', ':TranslateW<CR>', { noremap = true, silent = true })
 			vim.api.nvim_set_keymap('n', '<leader>sr', ':TranslateR<CR>', { noremap = true, silent = true })
