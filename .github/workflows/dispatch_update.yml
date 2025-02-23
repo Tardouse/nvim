@@ -1,0 +1,19 @@
+name: Dispatch Update
+on:
+  push:
+    branches: [main] 
+
+jobs:
+  dispatch:
+    needs: build
+    strategy:
+      matrix:
+        repo: ['z872845991/Config', 'z872845991/Config-Public']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.DISPATCH_REPO }}
+          repository: ${{ matrix.repo }}
+          event-type: update_nvim
