@@ -5,8 +5,8 @@ on:
     branches: [main] 
 
 jobs:
-  dispatch:
-    needs: build
+  build:
+    name: dispatch
     strategy:
       matrix:
         repo: ['z872845991/Config', 'z872845991/Config-Public']
