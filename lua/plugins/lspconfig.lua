@@ -333,7 +333,7 @@ F.configureKeybinds = function()
 			-- 跳转到定义
 			vim.keymap.set('n', '<c-l>', vim.lsp.buf.definition, opts)
 			-- 在新标签页中打开定义位置
-			vim.keymap.set('n', '<c-k>', ':tab sp<CR><cmd>lua vim.lsp.buf.definition()<cr>', opts)
+			-- vim.keymap.set('n', '<c-k>', ':tab sp<CR><cmd>lua vim.lsp.buf.definition()<cr>', opts)
 			-- 跳转到实现位置
 			vim.keymap.set('n', '<leader>hl', vim.lsp.buf.implementation, opts)
 			-- 跳转到类型定义
