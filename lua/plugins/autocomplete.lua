@@ -1,46 +1,43 @@
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- ******** has_words_before ********
+-- Check if there are words before the cursor
+-- local has_words_before = function()
+-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+-- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
+
+
+-- ******** moveCursorBeforeComma ********
+-- Move cursor before comma
+-- local moveCursorBeforeComma = function()
+-- 	if vim.bo.filetype ~= "dart" then
+-- 		return
+-- 	end
+-- 	vim.defer_fn(function()
+-- 		local line = vim.api.nvim_get_current_line()
+-- 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+-- 		local char = line:sub(col - 2, col)
+-- 		if char == ": ," then
+-- 			vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+-- 		end
+-- 	end, 100)
+-- end
+
+
+-- ******** label_comparator ********
+-- Sort completion items by label
+local label_comparator = function(entry1, entry2)
+	return entry1.completion_item.label < entry2.completion_item.label
 end
+
+
+
+-- ******** limitStr ********
+-- Limit string to 25 characters and add "..." if string is greater than 25
 local limitStr = function(str)
 	if #str > 25 then
 		str = string.sub(str, 1, 22) .. "..."
 	end
 	return str
-end
-
-local dartColonFirst = function(entry1, entry2)
-	if vim.bo.filetype ~= "dart" then
-		return nil
-	end
-	local entry1EndsWithColon = string.find(entry1.completion_item.label, ":") and entry1.source.name == 'nvim_lsp'
-	local entry2EndsWithColon = string.find(entry2.completion_item.label, ":") and entry2.source.name == 'nvim_lsp'
-	if entry1EndsWithColon and not entry2EndsWithColon then
-		return true
-	elseif not entry1EndsWithColon and entry2EndsWithColon then
-		return false
-	end
-	return nil
-end
-
-local dartColonFirst = function(entry1, entry2)
-	if vim.bo.filetype ~= "python" then
-		return nil
-	end
-	local entry1StartsWithUnderscore = string.sub(entry1.completion_item.label, 1, 1) == "_" and
-		entry1.source.name == 'nvim_lsp'
-	local entry2StartsWithUnderscore = string.sub(entry2.completion_item.label, 1, 1) == "_" and
-		entry2.source.name == 'nvim_lsp'
-	if entry1StartsWithUnderscore and not entry2StartsWithUnderscore then
-		return false
-	elseif not entry1StartsWithUnderscore and entry2StartsWithUnderscore then
-		return true
-	end
-	return nil
-end
-
-local label_comparator = function(entry1, entry2)
-	return entry1.completion_item.label < entry2.completion_item.label
 end
 
 local M = {}
@@ -114,20 +111,6 @@ local setCompHL = function()
 	vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#58B5A8" })
 end
 
-local moveCursorBeforeComma = function()
-	if vim.bo.filetype ~= "dart" then
-		return
-	end
-	vim.defer_fn(function()
-		local line = vim.api.nvim_get_current_line()
-		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-		local char = line:sub(col - 2, col)
-		if char == ": ," then
-			vim.api.nvim_win_set_cursor(0, { row, col - 1 })
-		end
-	end, 100)
-end
-
 M.configfunc = function()
 	local lspkind = require("lspkind")
 	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
@@ -154,8 +137,6 @@ M.configfunc = function()
 		},
 		sorting = {
 			comparators = {
-				-- label_comparator,
-				dartColonFirst,
 				cmp.config.compare.offset,
 				cmp.config.compare.exact,
 				cmp.config.compare.score,
@@ -191,18 +172,6 @@ M.configfunc = function()
 		}),
 		mapping = cmp.mapping.preset.insert({
 			['<C-o>'] = cmp.mapping.complete(),
-			["<c-e>"] = cmp.mapping(
-				function()
-					cmp_ultisnips_mappings.compose { "expand", "jump_forwards" } (function() end)
-				end,
-				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-			),
-			["<c-n>"] = cmp.mapping(
-				function(fallback)
-					cmp_ultisnips_mappings.jump_backwards(fallback)
-				end,
-				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-			),
 			['<c-f>'] = cmp.mapping({
 				i = function(fallback)
 					cmp.close()
@@ -224,10 +193,6 @@ M.configfunc = function()
 				i = function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-						moveCursorBeforeComma()
-						-- elseif has_words_before() then
-						-- 	cmp.complete()
-						-- 	moveCursorBeforeComma()
 					else
 						fallback()
 					end
@@ -237,7 +202,6 @@ M.configfunc = function()
 				i = function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-						moveCursorBeforeComma()
 					else
 						fallback()
 					end
