@@ -5,7 +5,7 @@ local nmappings = {
 	{ from = "<Esc>", to = "<cmd>nohlsearch<CR>" }, -- clear search
 
 	-- print some info
-	{ from = "\\p",   to = ":lua print(vim.fn.expand('%:p'))<CR>" }, -- print full path of current file
+	{ from = "\\w",   to = ":lua print(vim.fn.expand('%:p'))<CR>" }, -- print full path of current file
 
 	-- some layouts/function open
 	{ from = "<C-t>", to = ":NERDTreeToggle<CR>" },
