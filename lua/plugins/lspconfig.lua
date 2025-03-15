@@ -72,11 +72,43 @@ M.config = {
 					'ansiblels',
 					'terraformls',
 					'texlab',
-					'pyright',
 					'yamlls',
 					'tailwindcss',
 					'taplo',
 				}
+			})
+
+			local lspconfig = require('lspconfig')
+			require("mason-lspconfig").setup_handlers({
+				function(server_name)
+					local disabled_servers = {
+						-- "pyright",
+					}
+
+					if vim.tbl_contains(disabled_servers, server_name) then
+						return
+					end
+
+					lspconfig[server_name].setup({})
+				end,
+
+				["lua_ls"] = function()
+					require("config.lsp.lua").setup(lspconfig, lsp)
+				end,
+
+				["jsonls"] = function()
+					require("config.lsp.json").setup(lspconfig, lsp)
+				end,
+				["jedi_language_server"] = function()
+					vim.notify("Setting up Jedi Language Server...", vim.log.levels.INFO)
+
+					require('lspconfig').jedi_language_server.setup({
+						cmd = { "jedi-language-server" },
+					})
+
+					vim.notify("Jedi Language Server setup complete!", vim.log.levels.INFO, { timeout = 2000 })
+				end,
+
 			})
 
 			lsp.on_attach(function(client, bufnr)
@@ -115,30 +147,10 @@ M.config = {
 
 			lsp.format_on_save({
 				format_opts = {
-					-- async = false,
-					-- timeout_ms = 10000,
 				},
 			})
 
 
-			local lspconfig = require('lspconfig')
-
-			require("config.lsp.lua").setup(lspconfig, lsp)
-			require("config.lsp.json").setup(lspconfig, lsp)
-			-- require("config.lsp.flutter").setup(lsp)
-			require("config.lsp.html").setup(lspconfig, lsp)
-
-			require 'lspconfig'.html.setup {}
-			require 'lspconfig'.pyright.setup {}
-			require 'lspconfig'.tailwindcss.setup {}
-
-			require 'lspconfig'.ts_ls.setup {}
-			require 'lspconfig'.biome.setup {}
-			require 'lspconfig'.cssls.setup {}
-
-			require 'lspconfig'.taplo.setup {}
-
-			require 'lspconfig'.terraformls.setup {}
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 				pattern = { "*.tf", "*.tfvars", "*.lua" },
 				callback = function()
