@@ -22,7 +22,7 @@ vim.cmd [[
 ]]
 
 -- Set folding settings use by ufo provider
-vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldcolumn = '0' -- '0' is not bad
 vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
@@ -33,6 +33,6 @@ vim.opt.undodir = os.getenv("HOME") .. "/.local/.nvim_redo"
 vim.opt.undofile = true
 
 -- Setup clipboard
--- if vim.fn.has("clipboard") then
--- 	vim.opt.clipboard = "unnamedplus"
--- end
+if vim.fn.has("clipboard") then
+	vim.opt.clipboard = "unnamedplus"
+end
