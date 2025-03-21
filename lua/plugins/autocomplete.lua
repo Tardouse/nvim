@@ -1,37 +1,10 @@
--- ******** has_words_before ********
--- Check if there are words before the cursor
--- local has_words_before = function()
--- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
--- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
--- end
+local M = {}
 
-
--- ******** moveCursorBeforeComma ********
--- Move cursor before comma
--- local moveCursorBeforeComma = function()
--- 	if vim.bo.filetype ~= "dart" then
--- 		return
--- 	end
--- 	vim.defer_fn(function()
--- 		local line = vim.api.nvim_get_current_line()
--- 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
--- 		local char = line:sub(col - 2, col)
--- 		if char == ": ," then
--- 			vim.api.nvim_win_set_cursor(0, { row, col - 1 })
--- 		end
--- 	end, 100)
--- end
-
-
--- ******** label_comparator ********
 -- Sort completion items by label
 local label_comparator = function(entry1, entry2)
 	return entry1.completion_item.label < entry2.completion_item.label
 end
 
-
-
--- ******** limitStr ********
 -- Limit string to 25 characters and add "..." if string is greater than 25
 local limitStr = function(str)
 	if #str > 25 then
@@ -40,7 +13,13 @@ local limitStr = function(str)
 	return str
 end
 
-local M = {}
+-- -- ######## has_words_before  #########
+-- -- Check if there are words before the cursor
+-- local has_words_before = function()
+-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+-- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
+
 M.config = {
 	"hrsh7th/nvim-cmp",
 	after = "SirVer/ultisnips",
