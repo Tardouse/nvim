@@ -33,13 +33,13 @@
 ### debugger
 | Key       | Mode   | Action | description             |
 | ---       | ---    | ---    | ---                     |
-| <F5>      | Normal | -      | Start/Continue          |
-| <F1>      | Normal | -      | Step Into               |
-| <F2>      | Normal | -      | Step Over               |
-| <F3>      | Normal | -      | Step Out                |
-| <leader>b | Normal | -      | Toggle Breakpoint       |
-| <leader>B | Normal | -      | Set Breakpoint          |
-| <F7>      | Normal | -      | See last session result |
+| <leader>os      | Normal | -      | Start/Continue          |
+| <leader>ok      | Normal | -      | Step Into               |
+| <leader>oj      | Normal | -      | Step Over               |
+| <leader>ol      | Normal | -      | Step Out                |
+| <leader>ob      | Normal | -      | Toggle Breakpoint       |
+| <leader>oB      | Normal | -      | Set Breakpoint          |
+| <leader>op      | Normal | -      | See last session result |
 
 ### editor
 | Key | Mode   | Action | description    |
