@@ -19,6 +19,7 @@ require("lazy").setup({
 	require("plugins.telescope").config,
 	require("plugins.fzf"),
 	require("plugins.colorscheme"),
+	require("plugins.notify"),
 	require("plugins.transparent"),
 	require("plugins.vimlayouts"),
 	require("plugins.tabline"),
