@@ -10,7 +10,7 @@ return {
 				return " " .. icon .. count
 			end,
 			indicator = {
-				icon = '▎', -- this should be omitted if indicator style is not 'icon'
+				-- icon = '▎', -- this should be omitted if indicator style is not 'icon'
 				-- style = 'icon' | 'underline' | 'none',
 				style = "underline",
 			},
