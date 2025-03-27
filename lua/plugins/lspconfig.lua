@@ -100,15 +100,15 @@ M.config = {
 					require("config.lsp.json").setup(lspconfig, lsp)
 				end,
 				["jedi_language_server"] = function()
-					vim.notify("Setting up Jedi Language Server...", vim.log.levels.INFO)
-
+					-- vim.notify("Setting up Jedi Language Server...", vim.log.levels.INFO)
 					require('lspconfig').jedi_language_server.setup({
 						cmd = { "jedi-language-server" },
 					})
-
-					vim.notify("Jedi Language Server setup complete!", vim.log.levels.INFO, { timeout = 2000 })
+					-- vim.notify("Jedi Language Server setup complete!", vim.log.levels.INFO, { timeout = 2000 })
 				end,
+				-- ["pyright"] = function()
 
+				-- end,
 			})
 
 			lsp.on_attach(function(client, bufnr)
@@ -126,7 +126,7 @@ M.config = {
 					severity_sort = true,
 					underline = true,
 					signs = true,
-					virtual_text = false,
+					virtual_text = true,
 					update_in_insert = false,
 					float = true,
 				})
@@ -150,6 +150,15 @@ M.config = {
 				},
 			})
 
+			-- vim.api.nvim_create_autocmd('FileType', {
+			-- 	pattern = 'sh',
+			-- 	callback = function()
+			-- 		vim.lsp.start({
+			-- 			name = 'bash-language-server',
+			-- 			cmd = { 'bash-language-server', 'start' },
+			-- 		})
+			-- 	end,
+			-- })
 
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 				pattern = { "*.tf", "*.tfvars", "*.lua" },
