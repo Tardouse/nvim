@@ -356,9 +356,9 @@ F.configureKeybinds = function()
 			-- 在新标签页中打开定义位置
 			-- vim.keymap.set('n', '<c-k>', ':tab sp<CR><cmd>lua vim.lsp.buf.definition()<cr>', opts)
 			-- 跳转到实现位置
-			vim.keymap.set('n', '<leader>hl', vim.lsp.buf.implementation, opts)
+			vim.keymap.set('n', '<leader>hi', vim.lsp.buf.implementation, opts)
 			-- 跳转到类型定义
-			vim.keymap.set('n', '<leader>hL', vim.lsp.buf.type_definition, opts)
+			vim.keymap.set('n', '<leader>ho', vim.lsp.buf.type_definition, opts)
 			-- 显示所有引用
 			vim.keymap.set('n', '<leader>hr', vim.lsp.buf.references, opts)
 			-- 在插入模式下显示签名帮助
