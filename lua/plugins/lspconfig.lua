@@ -61,6 +61,8 @@ M.config = {
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
 				ensure_installed = {
+					"bashls",
+					"pyright",
 					"biome",
 					"cssls",
 					'ts_ls',
@@ -99,15 +101,15 @@ M.config = {
 				["jsonls"] = function()
 					require("config.lsp.json").setup(lspconfig, lsp)
 				end,
-				["jedi_language_server"] = function()
-					-- vim.notify("Setting up Jedi Language Server...", vim.log.levels.INFO)
-					require('lspconfig').jedi_language_server.setup({
-						cmd = { "jedi-language-server" },
-					})
-					-- vim.notify("Jedi Language Server setup complete!", vim.log.levels.INFO, { timeout = 2000 })
-				end,
-				-- ["pyright"] = function()
+				-- ["jedi_language_server"] = function()
+				-- 	-- vim.notify("Setting up Jedi Language Server...", vim.log.levels.INFO)
+				-- 	require('lspconfig').jedi_language_server.setup({
+				-- 		cmd = { "jedi-language-server" },
+				-- 	})
+				-- 	-- vim.notify("Jedi Language Server setup complete!", vim.log.levels.INFO, { timeout = 2000 })
+				-- end,
 
+				-- ["pyright"] = function()
 				-- end,
 			})
 
