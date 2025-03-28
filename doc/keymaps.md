@@ -1,14 +1,16 @@
 # Keymap
 
 ## Global keymap
-| Key   | Mode   | Action                                 | description            |
-| ---   | ---    | ---                                    | ---                    |
-| <Esc> | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
-| \\p   | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
-| <C-t> | Noraml | `:NEDTreeToggle<CR>`                   | Toggle NERDTree        |
-| "tp"  | Normal | `:bprevious<CR>`                       | Switch to previous buf |
-| "tn"  | Normal | `:bnext<CR>`                           | Switch to next buf     |
-| "td"  | Normal | `:bd<CR>`                              | Close current buf      |
+| Key        | Mode   | Action                                 | description            |
+| ---        | ---    | ---                                    | ---                    |
+| <Esc>      | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
+| \\p        | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
+| <C-t>      | Normal | `:NEDTreeToggle<CR>`                   | Toggle NERDTree        |
+| "tp"       | Normal | `:bprevious<CR>`                       | Switch to previous buf |
+| "tn"       | Normal | `:bnext<CR>`                           | Switch to next buf     |
+| "td"       | Normal | `:bd<CR>`                              | Close current buf      |
+|"<leader>dg"|Normal  | `:diffget<CR>`                         | diffget                |
+|"<leader>dp"|Normal  | `:diffput<CR>`                         | diffput                |
 
 
 ## Specific Plugin keymap 
