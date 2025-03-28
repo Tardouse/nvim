@@ -136,6 +136,80 @@ return {
 		dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 		dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+		-- debugpy adapter
+		dap.adapters.python = function(cb, config)
+			if config.request == 'attach' then
+				---@diagnostic disable-next-line: undefined-field
+				local port = (config.connect or config).port
+				---@diagnostic disable-next-line: undefined-field
+				local host = (config.connect or config).host or '127.0.0.1'
+				cb({
+					type = 'server',
+					port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+					host = host,
+					options = {
+						source_filetype = 'python',
+					},
+				})
+			else
+				local env_path = os.getenv("CONDA_PREFIX") or os.getenv("VIRTUAL_ENV")
+				if env_path then
+					env_path = env_path .. "/bin"
+				else
+					env_path = "/usr/bin"
+				end
+				cb({
+					type = 'executable',
+					command = env_path .. "/python",
+					args = { '-m', 'debugpy.adapter' },
+					options = {
+						source_filetype = 'python',
+					},
+				})
+			end
+		end
+		-- debugpy configuration
+		local dap = require('dap')
+		dap.configurations.python = {
+			{
+				-- The first three options are required by nvim-dap
+				type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+				request = 'launch',
+				name = "Launch file",
+
+				program = "${file}", -- This configuration will launch the current file if used.
+				args = function()
+					local input = vim.fn.input("Please Input Args: ")
+					return vim.split(input, " ", { trimempty = true })
+				end,
+				pythonPath = function()
+					-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+					-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+					-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+
+					local conda_prefix = os.getenv("CONDA_PREFIX")
+					if conda_prefix then
+						return conda_prefix .. "/bin/python"
+					end
+					-- 如果没有 conda，再检查 virtualenv 环境变量
+					local virtualenv = os.getenv("VIRTUAL_ENV")
+					if virtualenv then
+						return virtualenv .. "/bin/python"
+					end
+
+					local cwd = vim.fn.getcwd()
+					if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+						return cwd .. '/venv/bin/python'
+					elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+						return cwd .. '/.venv/bin/python'
+					else
+						return '/usr/bin/python'
+					end
+				end,
+			},
+		}
+
+
 		-- Install golang specific config
 		require('dap-go').setup {
 			delve = {
@@ -146,104 +220,3 @@ return {
 		}
 	end,
 }
-
--- local compile = function()
--- 	vim.cmd("write")
--- 	local filetype = vim.bo.filetype
--- 	if filetype == "cpp" or filetype == "c" then
--- 		os.execute("gcc " .. vim.fn.expand("%") .. " -g -o " .. vim.fn.expand("%<"))
--- 	end
--- end
--- return {
--- 	{
--- 		"mfussenegger/nvim-dap",
--- 		dependencies = {
--- 			{
--- 				"ravenxrz/DAPInstall.nvim",
--- 				config = function()
--- 					local dap_install = require("dap-install")
--- 					dap_install.setup({
--- 						installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
--- 					})
--- 				end
--- 			},
--- 			"theHamsta/nvim-dap-virtual-text",
--- 			{
--- 				"rcarriga/nvim-dap-ui",
--- 				dependencies = {
--- 					"nvim-neotest/nvim-nio",
--- 				},
--- 			},
--- 			"nvim-dap-virtual-text",
--- 			"nvim-telescope/telescope-dap.nvim",
--- 		},
--- 		config = function()
--- 			local dap = require("dap")
--- 			local dapui = require("dapui")
-
--- 			dapui.setup()
--- 			require("nvim-dap-virtual-text").setup()
-
--- 			-- dap.listeners.after.event_initialized["dapui_config"] = dapui.open
--- 			-- dap.listeners.before.event_terminated["dapui_config"] = dapui.close
--- 			-- dap.listeners.before.event_exited["dapui_config"] = dapui.close
-
--- 			local m = { noremap = true }
--- 			vim.keymap.set("n", "<leader>'t", dap.toggle_breakpoint, m)
--- 			vim.keymap.set("n", "<leader>'v", require('dap.ui.widgets').hover, m)
--- 			vim.keymap.set("n", "<leader>'n", function()
--- 				compile()
--- 				dap.continue()
--- 			end, m)
--- 			vim.keymap.set("n", "<leader>'s", dap.step_over, m)
--- 			local widgets = require('dap.ui.widgets')
--- 			vim.keymap.set("n", "<leader>'q", dap.terminate, m)
--- 			vim.keymap.set("n", "<leader>'u", dapui.toggle, m)
-
--- 			vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939', bg = '#31353f' })
--- 			vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef', bg = '#31353f' })
--- 			vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#ffffff', bg = '#FE3C25' })
-
--- 			vim.fn.sign_define('DapBreakpoint',
--- 				{ text = '', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
--- 			vim.fn.sign_define('DapBreakpointCondition',
--- 				{ text = 'ﳁ', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
--- 			vim.fn.sign_define('DapBreakpointRejected',
--- 				{ text = '', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
--- 			vim.fn.sign_define('DapLogPoint', {
--- 				text = '',
--- 				texthl = 'DapLogPoint',
--- 				linehl = 'DapLogPoint',
--- 				numhl = 'DapLogPoint'
--- 			})
--- 			vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
-
--- 			dap.adapters.codelldb = {
--- 				type = 'server',
--- 				port = "${port}",
--- 				executable = {
--- 					command = vim.g.codelldb_path,
--- 					args = { "--port", "${port}" },
--- 				}
--- 			}
--- 			dap.configurations.cpp = {
--- 				{
--- 					name = "Launch file",
--- 					type = "codelldb",
--- 					request = "launch",
--- 					program = function()
--- 						local exe = vim.g.c_debug_program or vim.fn.expand("%:r")
--- 						return vim.fn.getcwd() .. '/' .. exe
--- 					end,
--- 					cwd = '${workspaceFolder}',
--- 					stopOnEntry = false,
--- 				},
--- 			}
--- 			dap.configurations.c = dap.configurations.cpp
--- 			dap.configurations.rust = dap.configurations.cpp
-
--- 			local dap_install = require("dap-install")
--- 			dap_install.config("codelldb", {})
--- 		end
--- 	}
--- }
