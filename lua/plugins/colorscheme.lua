@@ -26,10 +26,17 @@ return {
 		priority = 1000,
 		opts = {
 		},
+	},
+	{
+		'ray-x/aurora',
+		init = function()
+			vim.g.aurora_italic = 1
+			vim.g.aurora_transparent = 1
+			vim.g.aurora_bold = 0
+		end,
 		config = function()
-			-- vim.cmd[[colorscheme tokyonight-night]]
-			vim.cmd [[colorscheme space-vim-dark]]
+			vim.cmd.colorscheme "aurora"
+			-- vim.api.nvim_set_hl(0, '@number', { fg = '#e933e3' })
 		end
 	}
 }
-
