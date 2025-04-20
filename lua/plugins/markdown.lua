@@ -44,13 +44,13 @@ return {
 			vim.api.nvim_set_keymap('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { noremap = true })
 		end
 	},
-	-- {
-	-- 	"dhruvasagar/vim-table-mode",
-	-- 	ft = { "markdown" },
-	-- 	config = function()
-	-- 		vim.api.nvim_set_keymap('n', '<leader>mt', ':TableModeToggle<CR>', { noremap = true })
-	-- 	end
-	-- },
+	{
+		"dhruvasagar/vim-table-mode",
+		ft = { "markdown" },
+		config = function()
+			vim.api.nvim_set_keymap('n', '<leader>mt', ':TableModeToggle<CR>', { noremap = true })
+		end
+	},
 	{
 		'mzlogin/vim-markdown-toc',
 		ft = { "markdown" },
