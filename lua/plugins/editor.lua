@@ -96,4 +96,13 @@ return {
 			require("nvim-autopairs").setup({})
 		end
 	},
+	{
+		"junegunn/vim-easy-align",
+		event = "VeryLazy",
+		keys = {
+			{ "ga", "<Plug>(EasyAlign)", mode = "n", desc = "EasyAlign (normal)" },
+			{ "ga", "<Plug>(EasyAlign)", mode = "x", desc = "EasyAlign (visual)" },
+		},
+		config = false,
+	}
 }
