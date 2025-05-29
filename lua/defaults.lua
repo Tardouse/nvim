@@ -2,6 +2,7 @@
 vim.opt.number = true                    -- Show line numbers
 vim.opt.relativenumber = true            --show relative line numbers
 vim.opt.autoindent = true                -- Enable auto-indentation
+vim.opt.expandtab = true
 vim.opt.tabstop = 4                      -- Number of spaces that a <Tab> in the file counts for (when 'expandtab' is not set).
 vim.opt.shiftwidth = 4                   -- Number of spaces to use for each step of (auto)indent
 vim.opt.smarttab = true                  -- Use shiftwidths at left margin, tabstops everywhere else
