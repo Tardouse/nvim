@@ -9,8 +9,8 @@
 | "tp"         | Normal | `:bprevious<CR>`                       | Switch to previous buf |
 | "tn"         | Normal | `:bnext<CR>`                           | Switch to next buf     |
 | "td"         | Normal | `:bd<CR>`                              | Close current buf      |
-| "<leader>dg" | Normal | `:diffget<CR>`                         | diffget                |
-| "<leader>dp" | Normal | `:diffput<CR>`                         | diffput                |
+| "\<leader\>dg" | Normal | `:diffget<CR>`                         | diffget                |
+| "\<leader\>dp" | Normal | `:diffput<CR>`                         | diffput                |
 
 
 ## Specific Plugin keymap 
@@ -35,13 +35,13 @@
 ### debugger
 | Key       | Mode   | Action | description             |
 | ---       | ---    | ---    | ---                     |
-| <leader>os      | Normal | -      | Start/Continue          |
-| <leader>ok      | Normal | -      | Step Into               |
-| <leader>oj      | Normal | -      | Step Over               |
-| <leader>ol      | Normal | -      | Step Out                |
-| <leader>ob      | Normal | -      | Toggle Breakpoint       |
-| <leader>oB      | Normal | -      | Set Breakpoint          |
-| <leader>op      | Normal | -      | See last session result |
+| \<leader\>os      | Normal | -      | Start/Continue          |
+| \<leader\>ok      | Normal | -      | Step Into               |
+| \<leader\>oj      | Normal | -      | Step Over               |
+| \<leader\>ol      | Normal | -      | Step Out                |
+| \<leader\>ob      | Normal | -      | Toggle Breakpoint       |
+| \<leader\>oB      | Normal | -      | Set Breakpoint          |
+| \<leader\>op      | Normal | -      | See last session result |
 
 ### editor
 | Key | Mode   | Action | description    |
@@ -55,7 +55,7 @@
 ### fun
 | Key        | Mode | Action | description       |
 | ---        | ---  | ---    | ---               |
-| <leader>rr | -    | -      | display rain code |
+| \<leader\>rr | -    | -      | display rain code |
 
 ### fzf
 | Key   | Mode   | Action | description                       |
@@ -79,34 +79,34 @@ builtin keymap:
 ### git
 | Key        | Mode | Action | description |
 | ---        | ---  | ---    | ---         |
-| <leader>lz | -    | -      | lazygit     |
-| <leader>gp | -    | -      | prev_hunk   |
-| <leader>gn | -    | -      | next_hunk   |
-| <leader>gr | -    | -      | reset_hunk  |
-| <leader>gb | -    | -      | blame_line  |
+| \<leader\>lz | -    | -      | lazygit     |
+| \<leader\>gp | -    | -      | prev_hunk   |
+| \<leader\>gn | -    | -      | next_hunk   |
+| \<leader\>gr | -    | -      | reset_hunk  |
+| \<leader\>gb | -    | -      | blame_line  |
 
 ### lsp
 | Key       | Mode   | Action | description          |
 | ---       | ---    | ---    | ---                  |
-| <leader>hd| Normal | -      | show documentation   |
+| \<leader\>hd| Normal | -      | show documentation   |
 | <c-l>     | Normal | -      | go to definition     |
-| <leader>hl| Normal | -      | go to implementation  |
-| <leader>hL| Normal | -      | go to type definition |
-| <leader>hr| Normal | -      | show references      |
+| \<leader\>hl| Normal | -      | go to implementation  |
+| \<leader\>hL| Normal | -      | go to type definition |
+| \<leader\>hr| Normal | -      | show references      |
 | <c-f>     | Insert | -      | show signature help  |
-| <leader>rn| Normal | -      | rename symbol        |
-| <leader>aw| Normal | -      | code action menu     |
-| <leader>ht| Normal | -      | toggle trouble       |
-| <leader>- | Normal | -      | goto prev diagnostic |
-| <leader>= | Normal | -      | goto next diagnostic |
+| \<leader\>rn| Normal | -      | rename symbol        |
+| \<leader\>aw| Normal | -      | code action menu     |
+| \<leader\>ht| Normal | -      | toggle trouble       |
+| \<leader\>- | Normal | -      | goto prev diagnostic |
+| \<leader\>= | Normal | -      | goto next diagnostic |
 
 ### markdown
 | Key        | Mode   | Action | description          |
 | ---        | ---    | ---    | ---                  |
-| <leader>mp | Normal | -      | toggle markdown view |
-| <leader>mt | Normal | -      | toggle table mode    |
-| <leader>mg | Normal | -      | generate toc         |
-| <leader>mc | Normal | -      | update toc           |
+| \<leader\>mp | Normal | -      | toggle markdown view |
+| \<leader\>mt | Normal | -      | toggle table mode    |
+| \<leader\>mg | Normal | -      | generate toc         |
+| \<leader\>mc | Normal | -      | update toc           |
 
 ### vim-visual-multi
 | Key   | Mode   | Action | description |
@@ -140,15 +140,15 @@ builtin keymap:
 ### telescope
 | Key        | Mode   | Action | description          |
 | ---        | ---    | ---    | ---                  |
-| <leader>tf | Normal | -      | find files           |
-| <leader>rs | Normal | -      | resume               |
-| <leader>tb | Normal | -      | buffers              |
-| <leader>to | Normal | -      | oldfiles             |
-| <leader>tz | Normal | -      | current_buffer_fuzzy |
-| <leader>ts | Normal | -      | spell_suggest        |
-| <leader>td | Normal | -      | diagnostics          |
-| <leader>tg | Normal | -      | git_status           |
-| <leader>t. | Normal | -      | commands             |
+| \<leader\>tf | Normal | -      | find files           |
+| \<leader\>rs | Normal | -      | resume               |
+| \<leader\>tb | Normal | -      | buffers              |
+| \<leader\>to | Normal | -      | oldfiles             |
+| \<leader\>tz | Normal | -      | current_buffer_fuzzy |
+| \<leader\>ts | Normal | -      | spell_suggest        |
+| \<leader\>td | Normal | -      | diagnostics          |
+| \<leader\>tg | Normal | -      | git_status           |
+| \<leader\>t. | Normal | -      | commands             |
 
 
 ### tex
@@ -157,14 +157,14 @@ builtin keymap:
 ### toggle-bool
 | Key       | Mode   | Action | description |
 | ---       | ---    | ---    | ---         |
-| <leader>s | Normal | -      | toggle bool |
+| \<leader\>s | Normal | -      | toggle bool |
 
 
 ### translate
 | Key        | Mode          | Action | description      |
 | ---        | ---           | ---    | ---              |
-| <leader>sw | Normal/Visual | -      | translate word   |
-| <leader>sr | Normal/Visual | -      | translate region |
+| \<leader\>sw | Normal/Visual | -      | translate word   |
+| \<leader\>sr | Normal/Visual | -      | translate region |
 
 
 ### Undo
@@ -176,19 +176,19 @@ builtin keymap:
 ### winbar
 | ---       | ---    | ---    | ---         |
 | Key       | Mode   | Action | description |
-| <leader>; | Normal | -      | pick        |
+| \<leader\>; | Normal | -      | pick        |
 
 
 ### window-management
 | Key       | Mode   | Action | description |
 | ---       | ---    | ---    | ---         |
-| <leader>f | Normal | -      | toggle zoom |
+| \<leader\>f | Normal | -      | toggle zoom |
 
 
 ### yank
 | Key       | Mode   | Action | description |
 | ---       | ---    | ---    | ---         |
-| <leader>y | Normal | `:Telescope neoclip<CR>`      | neoclip     |
+| \<leader\>y | Normal | `:Telescope neoclip<CR>`      | neoclip     |
 
 ### google_ai
 | Key   | Mode            | Action | description |
