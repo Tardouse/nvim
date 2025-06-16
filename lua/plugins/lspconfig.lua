@@ -97,10 +97,14 @@ M.config = {
                 ["lua_ls"] = function()
                     require("config.lsp.lua").setup(lspconfig, lsp)
                 end,
-
                 ["texlab"] = function()
-                    require("config.lsp.texlab").setup(lspconfig, lsp)
+                    local texlab_opts = require("config.lsp.texlab")
+                    require('lspconfig').texlab.setup(texlab_opts)
                 end,
+
+                --                 ["texlab"] = function()
+                --                     require("config.lsp.texlab").setup(lspconfig, lsp)
+                --                 end,
 
                 ["jsonls"] = function()
                     require("config.lsp.json").setup(lspconfig, lsp)
