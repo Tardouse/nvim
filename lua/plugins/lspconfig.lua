@@ -136,7 +136,7 @@ M.config = {
                     severity_sort = true,
                     underline = true,
                     signs = true,
-                    virtual_text = true,
+                    virtual_text = false,
                     update_in_insert = false,
                     float = true,
                 })
@@ -171,12 +171,12 @@ M.config = {
             -- })
 
 
-            vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-                pattern = { "*.tf", "*.tfvars", "*.lua" },
-                callback = function()
-                    vim.lsp.buf.format()
-                end,
-            })
+            -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+            --     pattern = { "*.tf", "*.tfvars", "*.lua" },
+            --     callback = function()
+            --         vim.lsp.buf.format()
+            --     end,
+            -- })
 
             vim.api.nvim_create_autocmd({ "BufWritePost" }, {
                 pattern = { "*.hcl" },
@@ -276,6 +276,7 @@ M.config = {
                 tex = true,
                 toml = true,
                 python = true,
+                sh = true,
             }
 
             vim.api.nvim_create_autocmd("BufWritePre", {
@@ -283,7 +284,11 @@ M.config = {
                 callback = function()
                     if format_on_save_filetypes[vim.bo.filetype] then
                         local lineno = vim.api.nvim_win_get_cursor(0)
-                        vim.lsp.buf.format({ async = false })
+                        vim.lsp.buf.format({
+                            async = false,
+                            insertSpace = true,
+                            tabSize = 4,
+                        })
                         pcall(vim.api.nvim_win_set_cursor, 0, lineno)
                     end
                 end,
