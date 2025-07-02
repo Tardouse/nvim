@@ -152,7 +152,7 @@ return {
             chktex = { onOpenAndSave = false, onEdit = false },
             diagnosticsDelay = 300,
             latexFormatter = 'latexindent',
-            latexindent = { ['local'] = nil, modifyLineBreaks = false },
+            latexindent = { ['local'] = vim.fn.stdpath('config') .. '/lua/config/lsp/latexindent.yaml', modifyLineBreaks = false },
             bibtexFormatter = 'texlab',
             formatterLineLength = 80,
         },
