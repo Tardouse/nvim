@@ -108,7 +108,7 @@ vim.api.nvim_create_user_command('TexlabToggleBuildOnSave', toggle_build_on_save
     desc = 'Toggle automatic building on save for Texlab (Client-side)',
 })
 
-vim.keymap.set('n', '<Leader>lt', '<Cmd>TexlabToggleBuildOnSave<CR>', {
+vim.keymap.set('n', '<leader>lt', '<Cmd>TexlabToggleBuildOnSave<CR>', {
     noremap = true,
     silent = true,
     desc = '[L]SP [T]oggle OnSave Build',
@@ -168,9 +168,9 @@ return {
         local map = vim.keymap.set
         local opts = { buffer = bufnr, desc = '' }
         opts.desc = '[L]SP [B]uild'
-        map('n', '<Leader>lb', '<Cmd>LspTexlabBuild<CR>', opts)
+        map('n', '<leader>lb', '<Cmd>LspTexlabBuild<CR>', opts)
         opts.desc = '[L]SP [S]earch'
-        map('n', '<Leader>ls', '<Cmd>LspTexlabForward<CR>', opts)
+        map('n', '<leader>ls', '<Cmd>LspTexlabForward<CR>', opts)
 
         -- NEW: Client-side auto-build logic
         -- Create an autocommand that runs after saving the buffer

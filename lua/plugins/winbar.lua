@@ -2,7 +2,7 @@ return {
 	"Bekaboo/dropbar.nvim",
 	config = function()
 		local api = require("dropbar.api")
-		vim.keymap.set('n', '<Leader>;', api.pick)
+		vim.keymap.set('n', '<leader>;', api.pick)
 
 		local confirm = function()
 			local menu = api.get_current_dropbar_menu()
