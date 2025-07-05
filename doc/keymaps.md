@@ -4,8 +4,9 @@
 | Key          | Mode   | Action                                 | description            |
 | ---          | ---    | ---                                    | ---                    |
 | <Esc>        | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
-| \\p          | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
-| <C-t>        | Normal | `:NEDTreeToggle<CR>`                   | Toggle NERDTree        |
+| \\w          | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
+| <C-t>        | Normal | `:NERDTreeToggle<CR>`                   | Toggle NERDTree        |
+| <C-j>        | Normal | `:set paste<CR>o<Esc>:set nopaste<CR>` | Insert line below |
 | "tp"         | Normal | `:bprevious<CR>`                       | Switch to previous buf |
 | "tn"         | Normal | `:bnext<CR>`                           | Switch to next buf     |
 | "td"         | Normal | `:bd<CR>`                              | Close current buf      |
@@ -30,7 +31,7 @@
 ### copilot
 | Key   | Mode   | Action | description           |
 | ---   | ---    | ---    | ---                   |
-| <Tab> | Noraml |        | accept the suggestion |
+| <Tab> | Insert |        | accept the suggestion |
 
 ### debugger
 | Key       | Mode   | Action | description             |
@@ -90,8 +91,8 @@ builtin keymap:
 | ---       | ---    | ---    | ---                  |
 | \<leader\>hd| Normal | -      | show documentation   |
 | <c-l>     | Normal | -      | go to definition     |
-| \<leader\>hl| Normal | -      | go to implementation  |
-| \<leader\>hL| Normal | -      | go to type definition |
+| \<leader\>hi| Normal | -      | go to implementation  |
+| \<leader\>ho| Normal | -      | go to type definition |
 | \<leader\>hr| Normal | -      | show references      |
 | <c-f>     | Insert | -      | show signature help  |
 | \<leader\>rn| Normal | -      | rename symbol        |
@@ -172,9 +173,7 @@ builtin keymap:
 | --- | ---    | ---    | ---         |
 | tu  | Normal | -      | undo tree   |
 
-
 ### winbar
-| ---       | ---    | ---    | ---         |
 | Key       | Mode   | Action | description |
 | \<leader\>; | Normal | -      | pick        |
 
