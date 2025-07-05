@@ -92,15 +92,26 @@ M.config = {
                 end,
             }
 
-            require('mason-lspconfig').setup_handlers({
-                function(server_name)
+            local mlsp = require('mason-lspconfig')
+            if mlsp.setup_handlers then
+                mlsp.setup_handlers({
+                    function(server_name)
+                        if server_handlers[server_name] then
+                            server_handlers[server_name]()
+                            return
+                        end
+                        lspconfig[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
+                    end,
+                })
+            else
+                for _, server_name in ipairs(mlsp.get_installed_servers()) do
                     if server_handlers[server_name] then
                         server_handlers[server_name]()
-                        return
+                    else
+                        lspconfig[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
                     end
-                    lspconfig[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
-                end,
-            })
+                end
+            end
 
             require('fidget').setup({})
             local defaults = lspconfig.util.default_config
