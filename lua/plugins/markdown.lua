@@ -23,7 +23,7 @@ return {
 				endfunction
 			]])
 
-			local sysname = vim.loop.os_uname().sysname
+                        local sysname = vim.uv.os_uname().sysname
 			if sysname == 'Linux' then
 				if vim.env.SSH_CONNECTION then
 					vim.g.mkdp_browserfunc = 'EchoUrl'

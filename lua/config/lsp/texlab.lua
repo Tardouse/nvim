@@ -66,10 +66,7 @@ end
 
 -- ... (other helper functions like buf_cancel_build, etc. remain the same)
 local function buf_cancel_build(client, bufnr)
-    if vim.fn.has 'nvim-0.11' == 1 then
-        return client:exec_cmd({ title = 'cancel', command = 'texlab.cancelBuild' }, { bufnr = bufnr })
-    end
-    vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
+    client:exec_cmd({ title = 'cancel', command = 'texlab.cancelBuild' }, { bufnr = bufnr })
     vim.notify('Build cancelled', vim.log.levels.INFO)
 end
 
@@ -89,21 +86,17 @@ local function command_factory(cmd)
         CancelBuild = 'texlab.cancelBuild',
     }
     return function(client, bufnr)
-        if vim.fn.has 'nvim-0.11' == 1 then
-            return client:exec_cmd({
-                title = ('clean_%s'):format(cmd),
-                command = cmd_tbl[cmd],
-                arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-            }, { bufnr = bufnr }, function(err, _)
-                if err then
-                    vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
-                else
-                    vim.notify(('command %s executed successfully'):format(cmd), vim.log.levels.INFO)
-                end
-            end)
-        end
-        vim.lsp.buf.execute_command { command = cmd_tbl[cmd], arguments = { { uri = vim.uri_from_bufnr(bufnr) } } }
-        vim.notify(('command %s executed successfully'):format(cmd_tbl[cmd]))
+        client:exec_cmd({
+            title = ('clean_%s'):format(cmd),
+            command = cmd_tbl[cmd],
+            arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+        }, { bufnr = bufnr }, function(err, _)
+            if err then
+                vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
+            else
+                vim.notify(('command %s executed successfully'):format(cmd_tbl[cmd]), vim.log.levels.INFO)
+            end
+        end)
     end
 end
 

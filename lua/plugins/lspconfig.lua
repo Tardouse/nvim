@@ -188,13 +188,13 @@ M.config = {
 }
 
 F.configureDocAndSignature = function()
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
+    vim.lsp.handlers["textDocument/signatureHelp"] = function(...)
+        return vim.lsp.buf.signature_help({
             focusable = false,
             border = "rounded",
             zindex = 60,
-        }
-    )
+        }, ...)
+    end
     local group = vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         pattern = "*",
@@ -247,8 +247,12 @@ F.configureKeybinds = function()
             vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
             vim.keymap.set('n', '<leader>aw', vim.lsp.buf.code_action, opts)
             vim.keymap.set('n', '<leader>ht', ':Trouble<cr>', opts)
-            vim.keymap.set('n', '<leader>-', vim.diagnostic.goto_prev, opts)
-            vim.keymap.set('n', '<leader>=', vim.diagnostic.goto_next, opts)
+            vim.keymap.set('n', '<leader>-', function()
+                vim.diagnostic.jump({ count = -1, float = true })
+            end, opts)
+            vim.keymap.set('n', '<leader>=', function()
+                vim.diagnostic.jump({ count = 1, float = true })
+            end, opts)
         end,
     })
 end
