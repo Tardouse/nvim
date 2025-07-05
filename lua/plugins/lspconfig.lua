@@ -82,11 +82,24 @@ end
 -- Configures format on save functionality.
 local function configure_format_on_save()
     local format_on_save_filetypes = {
-        json = true, go = true, lua = true, html = true, css = true,
-        javascript = true, typescript = true, typescriptreact = true,
-        c = true, cpp = true, objc = true, objcpp = true,
-        dockerfile = true, terraform = false, tex = true, toml = true,
-        python = true, sh = true,
+        json = true,
+        go = true,
+        lua = true,
+        html = true,
+        css = true,
+        javascript = true,
+        typescript = true,
+        typescriptreact = true,
+        c = true,
+        cpp = true,
+        objc = true,
+        objcpp = true,
+        dockerfile = true,
+        terraform = false,
+        tex = true,
+        toml = true,
+        python = true,
+        sh = true,
     }
 
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -124,10 +137,10 @@ M.config = {
                 "folke/trouble.nvim",
                 opts = { use_diagnostic_signs = true, action_keys = { close = "<esc>", previous = "k", next = "j" } },
             },
-            { 'williamboman/mason.nvim', build = function() vim.cmd([[MasonInstall]]) end },
+            { 'williamboman/mason.nvim',          build = function() vim.cmd([[MasonInstall]]) end },
             { 'williamboman/mason-lspconfig.nvim' },
             { 'hrsh7th/cmp-nvim-lsp' },
-            { 'j-hui/fidget.nvim', tag = 'legacy' },
+            { 'j-hui/fidget.nvim',                tag = 'legacy' },
             'folke/neodev.nvim',
             'ray-x/lsp_signature.nvim',
             'ldelossa/nvim-dap-projects',
@@ -165,23 +178,31 @@ M.config = {
                     bind = true,
                     handler_opts = { border = "rounded" }
                 }, bufnr)
-
-                -- Configure diagnostics
-                vim.diagnostic.config({
-                    severity_sort = true,
-                    underline = true,
-                    signs = true,
-                    virtual_text = false,
-                    update_in_insert = false,
-                    float = true,
-                })
-
-                local signs = { Error = '✘', Warn = '▲', Hint = '⚑', Info = '»' }
-                for type, icon in pairs(signs) do
-                    local hl = 'DiagnosticSign' .. type
-                    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-                end
             end
+
+            -- Configure diagnostics
+            local signs = { Error = "✘", Warn = "", Hint = "⚑", Info = "" }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+            end
+
+            vim.diagnostic.config({
+                severity_sort = true,
+                underline = true,
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = signs.Error,
+                        [vim.diagnostic.severity.WARN] = signs.Warn,
+                        [vim.diagnostic.severity.HINT] = signs.Hint,
+                        [vim.diagnostic.severity.INFO] = signs.Info,
+                    },
+                },
+                virtual_text = false,
+                update_in_insert = false,
+                float = true,
+            })
+
 
             -- Centralized server configurations
             local server_handlers = {
