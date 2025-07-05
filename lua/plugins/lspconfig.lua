@@ -47,7 +47,7 @@ M.config = {
                 ensure_installed = {
                     'bashls', 'pyright', 'biome', 'cssls', 'ts_ls', 'lua_ls',
                     'eslint', 'jsonls', 'html', 'dockerls', 'ansiblels',
-                    'terraformls', 'texlab', 'yamlls', 'tailwindcss', 'taplo',
+                    'texlab', 'yamlls', 'tailwindcss', 'taplo',
                 },
             })
 
