@@ -204,21 +204,28 @@ M.config = {
             })
 
 
-            -- Centralized server configurations
-            local server_handlers = {
-                ['lua_ls'] = function()
-                    require('config.lsp.lua').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['texlab'] = function()
-                    require('config.lsp.texlab').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['jsonls'] = function()
-                    require('config.lsp.json').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['yamlls'] = function()
-                    require('config.lsp.yaml').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
+            -- Mapping of lsp server name to its configuration module
+            local server_config_map = {
+                lua_ls = 'lua',
+                texlab = 'texlab',
+                jsonls = 'json',
+                yamlls = 'yaml',
+                html = 'html',
             }
+
+            -- Helper to setup a server using its configuration file when present
+            local function setup_with_config(server_name)
+                local module_name = server_config_map[server_name]
+                if module_name then
+                    require('config.lsp.' .. module_name)
+                        .setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
+                else
+                    lspconfig[server_name].setup({
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                    })
+                end
+            end
 
             -- Setup mason-lspconfig to manage servers.
             require('mason-lspconfig').setup({
@@ -228,18 +235,7 @@ M.config = {
                     'texlab', 'yamlls', 'tailwindcss', 'taplo',
                 },
                 handlers = {
-                    -- Default handler for servers without custom setup.
-                    function(server_name)
-                        lspconfig[server_name].setup({
-                            on_attach = on_attach,
-                            capabilities = capabilities,
-                        })
-                    end,
-                    -- Custom handlers for specific servers.
-                    ['lua_ls'] = server_handlers.lua_ls,
-                    ['texlab'] = server_handlers.texlab,
-                    ['jsonls'] = server_handlers.jsonls,
-                    ['yamlls'] = server_handlers.yamlls,
+                    setup_with_config,
                 },
             })
 
