@@ -106,9 +106,13 @@ local function configure_format_on_save()
         pattern = '*',
         callback = function()
             if format_on_save_filetypes[vim.bo.filetype] then
-                local view = vim.fn.winsaveview()
-                vim.lsp.buf.format({ async = true })
-                vim.fn.winrestview(view)
+                local lineno = vim.api.nvim_win_get_cursor(0)
+                vim.lsp.buf.format({
+                    async = false,
+                    insertSpace = true,
+                    tabSize = 4,
+                })
+                pcall(vim.api.nvim_win_set_cursor, 0, lineno)
             end
         end,
     })
