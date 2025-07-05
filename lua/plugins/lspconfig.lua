@@ -202,24 +202,6 @@ M.config = {
                 update_in_insert = false,
                 float = true,
             })
-
-
-            -- Centralized server configurations
-            local server_handlers = {
-                ['lua_ls'] = function()
-                    require('config.lsp.lua').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['texlab'] = function()
-                    require('config.lsp.texlab').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['jsonls'] = function()
-                    require('config.lsp.json').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['yamlls'] = function()
-                    require('config.lsp.yaml').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-            }
-
             -- Setup mason-lspconfig to manage servers.
             require('mason-lspconfig').setup({
                 ensure_installed = {
@@ -235,11 +217,6 @@ M.config = {
                             capabilities = capabilities,
                         })
                     end,
-                    -- Custom handlers for specific servers.
-                    ['lua_ls'] = server_handlers.lua_ls,
-                    ['texlab'] = server_handlers.texlab,
-                    ['jsonls'] = server_handlers.jsonls,
-                    ['yamlls'] = server_handlers.yamlls,
                 },
             })
 
