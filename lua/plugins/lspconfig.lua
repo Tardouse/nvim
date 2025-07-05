@@ -1,10 +1,7 @@
 -- lua/plugins/lspconfig.lua
-local M = {}
+vim.o.winborder = "rounded"
 
---[[
-Local helper functions.
-Formerly in a table `F`, now defined as local functions for better encapsulation.
-]]
+local M = {}
 
 local documentation_window_open = false
 local documentation_window_open_index = 0
@@ -35,7 +32,6 @@ local function configure_lsp_keybinds()
             vim.keymap.set('n', '<leader>hi', vim.lsp.buf.implementation, opts)
             vim.keymap.set('n', '<leader>ho', vim.lsp.buf.type_definition, opts)
             vim.keymap.set('n', '<leader>hr', vim.lsp.buf.references, opts)
-            vim.keymap.set('i', '<c-f>', vim.lsp.buf.signature_help, opts)
             vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
             vim.keymap.set('n', '<leader>aw', vim.lsp.buf.code_action, opts)
             vim.keymap.set('n', '<leader>ht', ':Trouble<cr>', opts)
@@ -45,29 +41,28 @@ local function configure_lsp_keybinds()
             vim.keymap.set('n', '<leader>=', function()
                 vim.diagnostic.jump({ count = 1, float = true })
             end, opts)
+            vim.keymap.set('i', '<C-f>', function()
+                vim.lsp.buf.signature_help({
+                    focusable = false,
+                    zindex    = 60,
+                })
+            end, opts)
         end,
     })
 end
 
 -- Configures diagnostic pop-ups and signature help.
 local function configure_doc_and_signature()
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
-            focusable = false,
-            border = "rounded",
-            zindex = 60,
-        }
-    )
-
     local group = vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
-    vim.api.nvim_create_autocmd({ "CursorHold" }, {
-        pattern = "*",
+    vim.api.nvim_create_autocmd("CursorHold", {
+        pattern  = "*",
+        group    = group,
         callback = function()
             if not documentation_window_open then
                 vim.diagnostic.open_float(0, {
-                    scope = "cursor",
-                    focusable = false,
-                    zindex = 10,
+                    scope        = "cursor",
+                    focusable    = false,
+                    zindex       = 10,
                     close_events = {
                         "CursorMoved", "CursorMovedI", "BufHidden",
                         "InsertCharPre", "InsertEnter", "WinLeave", "ModeChanged",
@@ -75,7 +70,6 @@ local function configure_doc_and_signature()
                 })
             end
         end,
-        group = group,
     })
 end
 
