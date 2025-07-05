@@ -118,9 +118,7 @@ vim.keymap.set('n', '<leader>lt', '<Cmd>TexlabToggleBuildOnSave<CR>', {
 -- =================================================================================
 -- Main configuration table
 -- =================================================================================
-return {
-    setup = function(opts)
-        vim.lsp.config('texlab', vim.tbl_deep_extend('force', {
+vim.lsp.config('texlab', vim.tbl_deep_extend('force', {
             cmd = { 'texlab' },
             filetypes = { 'tex', 'plaintex', 'bib' },
             root_markers = { '.git', '.latexmkrc', 'latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
@@ -181,6 +179,4 @@ return {
                     end,
                 })
             end,
-        }, opts or {}))
-    end,
-}
+}))

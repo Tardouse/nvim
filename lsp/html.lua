@@ -1,4 +1,1 @@
-return {
-	setup = function(lspconfig, lsp)
-	end
-}
+vim.lsp.config('html', {})

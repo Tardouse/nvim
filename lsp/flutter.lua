@@ -9,8 +9,8 @@ local preview_stack_trace = function()
 		vim.cmd(":wincmd j")
 	end
 end
-return {
-	setup = function(lsp)
+vim.lsp.config('dartls', {
+        setup = function(lsp)
 		vim.api.nvim_create_autocmd("BufEnter", {
 			pattern = "__FLUTTER_DEV_LOG__",
 			callback = function()
@@ -92,6 +92,6 @@ return {
 					require("dap.ext.vscode").load_launchjs()
 				end,
 			},
-		})
-	end
-}
+                })
+        end,
+})
