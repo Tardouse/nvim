@@ -118,40 +118,42 @@ vim.keymap.set('n', '<leader>lt', '<Cmd>TexlabToggleBuildOnSave<CR>', {
 -- =================================================================================
 -- Main configuration table
 -- =================================================================================
-return {
-    cmd = { 'texlab' },
-    filetypes = { 'tex', 'plaintex', 'bib' },
-    root_markers = { '.git', '.latexmkrc', 'latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
-    settings = {
-        texlab = {
-            build = {
-                executable = 'latexmk',
-                args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
-                -- MODIFIED: We permanently disable the server's onSave feature.
-                onSave = false,
-                forwardSearchAfter = true,
-            },
-            forwardSearch = {
-                executable = 'zathura',
-                args = { '--synctex-forward', '%l:1:%f', '%p' },
-                -- executable = 'okular',
-                -- args = { '--unique', 'file:%p#src:%l%f' },
+return function(opts)
+    local config = {
+        cmd = { 'texlab' },
+        filetypes = { 'tex', 'plaintex', 'bib' },
+        root_markers = { '.git', '.latexmkrc', 'latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
+        settings = {
+            texlab = {
+                build = {
+                    executable = 'latexmk',
+                    args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
+                    -- MODIFIED: We permanently disable the server's onSave feature.
+                    onSave = false,
+                    forwardSearchAfter = true,
+                },
+                forwardSearch = {
+                    executable = 'zathura',
+                    args = { '--synctex-forward', '%l:1:%f', '%p' },
+                    -- executable = 'okular',
+                    -- args = { '--unique', 'file:%p#src:%l%f' },
 
-                -- for windows
-                -- executable = 'SumatraPDF',
-                -- args = { '-forward-search', '%f', '%l', '%p' },
+                    -- for windows
+                    -- executable = 'SumatraPDF',
+                    -- args = { '-forward-search', '%f', '%l', '%p' },
+                },
+                -- ... (rest of your settings are fine)
+                chktex = { onOpenAndSave = false, onEdit = false },
+                diagnosticsDelay = 300,
+                latexFormatter = 'latexindent',
+                latexindent = { ['local'] = vim.fn.stdpath('config') .. '/lua/config/lsp/latexindent.yaml', modifyLineBreaks = false },
+                bibtexFormatter = 'texlab',
+                formatterLineLength = 80,
             },
-            -- ... (rest of your settings are fine)
-            chktex = { onOpenAndSave = false, onEdit = false },
-            diagnosticsDelay = 300,
-            latexFormatter = 'latexindent',
-            latexindent = { ['local'] = vim.fn.stdpath('config') .. '/lua/config/lsp/latexindent.yaml', modifyLineBreaks = false },
-            bibtexFormatter = 'texlab',
-            formatterLineLength = 80,
         },
-    },
+    }
 
-    on_attach = function(client, bufnr)
+    config.on_attach = function(client, bufnr)
         -- Your existing buffer-local commands (LspTexlabBuild, etc.)
         vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabBuild', client_with_fn(buf_build),
             { desc = 'Build the current buffer' })
@@ -187,5 +189,11 @@ return {
                 end
             end,
         })
-    end,
-}
+
+        if opts and opts.on_attach then
+            opts.on_attach(client, bufnr)
+        end
+    end
+
+    return vim.tbl_deep_extend('force', config, opts or {})
+end

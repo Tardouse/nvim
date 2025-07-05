@@ -158,7 +158,6 @@ M.config = {
             require('fidget').setup({})
             require('nvim-dap-projects').search_project_config()
 
-            local lspconfig = require('lspconfig')
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
             -- Shared on_attach function for all LSP servers.
@@ -205,20 +204,26 @@ M.config = {
 
 
             -- Centralized server configurations
-            local server_handlers = {
-                ['lua_ls'] = function()
-                    require('config.lsp.lua').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['texlab'] = function()
-                    require('config.lsp.texlab').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['jsonls'] = function()
-                    require('config.lsp.json').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
-                ['yamlls'] = function()
-                    require('config.lsp.yaml').setup(lspconfig, { on_attach = on_attach, capabilities = capabilities })
-                end,
+            local opts = { on_attach = on_attach, capabilities = capabilities }
+            local server_configs = {
+                lua_ls = require('config.lsp.lua')(opts),
+                texlab = require('config.lsp.texlab')(opts),
+                jsonls = require('config.lsp.json')(opts),
+                yamlls = require('config.lsp.yaml')(opts),
             }
+
+            local default_servers = {
+                'bashls', 'pyright', 'biome', 'cssls', 'ts_ls', 'eslint',
+                'html', 'dockerls', 'ansiblels', 'tailwindcss', 'taplo',
+            }
+
+            for _, server in ipairs(default_servers) do
+                vim.lsp.config(server, opts)
+            end
+
+            for name, cfg in pairs(server_configs) do
+                vim.lsp.config(name, cfg)
+            end
 
             -- Setup mason-lspconfig to manage servers.
             require('mason-lspconfig').setup({
@@ -227,20 +232,7 @@ M.config = {
                     'eslint', 'jsonls', 'html', 'dockerls', 'ansiblels',
                     'texlab', 'yamlls', 'tailwindcss', 'taplo',
                 },
-                handlers = {
-                    -- Default handler for servers without custom setup.
-                    function(server_name)
-                        lspconfig[server_name].setup({
-                            on_attach = on_attach,
-                            capabilities = capabilities,
-                        })
-                    end,
-                    -- Custom handlers for specific servers.
-                    ['lua_ls'] = server_handlers.lua_ls,
-                    ['texlab'] = server_handlers.texlab,
-                    ['jsonls'] = server_handlers.jsonls,
-                    ['yamlls'] = server_handlers.yamlls,
-                },
+                automatic_enable = true,
             })
 
             -- Apply global configurations

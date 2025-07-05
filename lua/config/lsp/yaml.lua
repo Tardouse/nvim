@@ -1,9 +1,5 @@
-local M = {}
-
-M.setup = function(lspconfig, opts)
-    lspconfig.yamlls.setup({
-        on_attach = opts.on_attach,
-        capabilities = opts.capabilities,
+return function(opts)
+    return vim.tbl_deep_extend('force', {
         settings = {
             redhat = { telemetry = { enabled = false } },
             yaml = {
@@ -17,7 +13,5 @@ M.setup = function(lspconfig, opts)
                 },
             },
         },
-    })
+    }, opts or {})
 end
-
-return M
