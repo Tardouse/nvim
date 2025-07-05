@@ -1,8 +1,5 @@
 return {
-	setup = function(lspconfig, lsp)
-		lspconfig.jsonls.setup({
-			on_attach = function()
-			end,
-		})
-	end
+    setup = function(lspconfig, opts)
+        lspconfig.jsonls.setup(vim.tbl_deep_extend('force', opts or {}, {}))
+    end,
 }
