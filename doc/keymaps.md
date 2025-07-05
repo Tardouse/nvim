@@ -3,10 +3,10 @@
 ## Global keymap
 | Key          | Mode   | Action                                 | description            |
 | ---          | ---    | ---                                    | ---                    |
-| <Esc>        | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
+| \<Esc\>        | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
 | \\w          | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
-| <C-t>        | Normal | `:NERDTreeToggle<CR>`                   | Toggle NERDTree        |
-| <C-j>        | Normal | `:set paste<CR>o<Esc>:set nopaste<CR>` | Insert line below |
+| \<C-t\>        | Normal | `:NERDTreeToggle<CR>`                   | Toggle NERDTree        |
+| \<C-j\>        | Normal | `:set paste<CR>o<Esc>:set nopaste<CR>` | Insert line below |
 | "tp"         | Normal | `:bprevious<CR>`                       | Switch to previous buf |
 | "tn"         | Normal | `:bnext<CR>`                           | Switch to next buf     |
 | "td"         | Normal | `:bd<CR>`                              | Close current buf      |
@@ -19,8 +19,8 @@
 ### AutoCompletion
 | Key   | Mode   | Action | description |
 | ---   | ---    | ---    | ---         |
-| <C-f> | Insert | -      | close cmp   |
-| <C-o> | Insert | -      | open cmp    |
+| \<C-f\> | Insert | -      | close cmp   |
+| \<C-o\> | Insert | -      | open cmp    |
 
 ### vim-commentary
 | Key | Mode   | Action | description               |
@@ -31,7 +31,7 @@
 ### copilot
 | Key   | Mode   | Action | description           |
 | ---   | ---    | ---    | ---                   |
-| <Tab> | Insert |        | accept the suggestion |
+| \<Tab\> | Insert |        | accept the suggestion |
 
 ### debugger
 | Key       | Mode   | Action | description             |
@@ -61,21 +61,21 @@
 ### fzf
 | Key   | Mode   | Action | description                       |
 | ---   | ---    | ---    | ---                               |
-| <C-f> | Normal | -      | fzf contents                      |
-| <C-f> | Visual | -      | fzf contents via visual selection |
+| \<C-f\> | Normal | -      | fzf contents                      |
+| \<C-f\> | Visual | -      | fzf contents via visual selection |
 
 builtin keymap:
 | Key      | Mode | Action | description         |
 | ---      | ---  | ---    | ---                 |
-| <c-f>    | -    | -      | toggle-fullscreen   |
-| <c-r>    | -    | -      | toggle-preview-wrap |
-| <c-p>    | -    | -      | toggle-preview      |
-| <c-n>    | -    | -      | preview-page-down   |
-| <c-u>    | -    | -      | preview-page-up     |
-| <S-left> | -    | -      | preview-page-reset  |
-| esc      | -    | -      | abort               |
-| ctrl-j   | -    | -      | down                |
-| ctrl-k   | -    | -      | up                  |
+| \<C-f\>    | -    | -      | toggle-fullscreen   |
+| \<C-r\>    | -    | -      | toggle-preview-wrap |
+| \<C-p\>    | -    | -      | toggle-preview      |
+| \<C-n\>    | -    | -      | preview-page-down   |
+| \<C-u\>    | -    | -      | preview-page-up     |
+| \<S-left\> | -    | -      | preview-page-reset  |
+| \<Esc\>      | -    | -      | abort               |
+| \<C-j\>   | -    | -      | down                |
+| \<C-k\>   | -    | -      | up                  |
 
 ### git
 | Key        | Mode | Action | description |
@@ -90,11 +90,11 @@ builtin keymap:
 | Key       | Mode   | Action | description          |
 | ---       | ---    | ---    | ---                  |
 | \<leader\>hd| Normal | -      | show documentation   |
-| <c-l>     | Normal | -      | go to definition     |
+| \<C-l\>     | Normal | -      | go to definition     |
 | \<leader\>hi| Normal | -      | go to implementation  |
 | \<leader\>ho| Normal | -      | go to type definition |
 | \<leader\>hr| Normal | -      | show references      |
-| <c-f>     | Insert | -      | show signature help  |
+| \<C-f\>     | Insert | -      | show signature help  |
 | \<leader\>rn| Normal | -      | rename symbol        |
 | \<leader\>aw| Normal | -      | code action menu     |
 | \<leader\>ht| Normal | -      | toggle trouble       |
@@ -112,20 +112,20 @@ builtin keymap:
 ### vim-visual-multi
 | Key   | Mode   | Action | description |
 | ---   | ---    | ---    | ---         |
-| <C-n> | Normal | -      | start multi |
-| <C-n> | Visual | -      | start multi |
+| \<C-n\> | Normal | -      | start multi |
+| \<C-n\> | Visual | -      | start multi |
 
 ### ranger
 | Key   | Mode   | Action | description   |
 | ---   | ---    | ---    | ---           |
-| <M-o> | Normal | -      | toggle ranger |
+| \<M-o\> | Normal | -      | toggle ranger |
 
 builtin keymap:
 | Key   | Mode | Action | description                 |
 | ---   | ---  | ---    | ---                         |
-| <C-t> | -    | -      | open in tab                 |
-| <C-x> | -    | -      | open in split               |
-| <C-v> | -    | -      | open in vsplit              |
+| \<C-t\> | -    | -      | open in tab                 |
+| \<C-x\> | -    | -      | open in split               |
+| \<C-v\> | -    | -      | open in vsplit              |
 | gw    | -    | -      | jump to cwd                 |
 | yw    | -    | -      | emit ranger cwd and jump it |
 
@@ -192,4 +192,4 @@ builtin keymap:
 ### google_ai
 | Key   | Mode            | Action | description |
 | ---   | ---             | ---    | ---         |
-| <Tab> | Normal & insert |        | accept      |
+| \<Tab\> | Normal & insert |        | accept      |
