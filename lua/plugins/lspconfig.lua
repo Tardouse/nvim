@@ -1,5 +1,5 @@
 -- lua/plugins/lspconfig.lua
-vim.o.winborder = "rounded"
+-- vim.o.winborder = "rounded"
 
 local M = {}
 
