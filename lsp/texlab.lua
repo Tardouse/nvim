@@ -179,5 +179,11 @@ vim.lsp.config('texlab',
                     end
                 end,
             })
+
+            require('plugins.autocomplete').configfunc()
+            require('lsp_signature').on_attach({
+                bind = true,
+                handler_opts = { border = "rounded" }
+            }, bufnr)
         end,
     })

@@ -203,21 +203,24 @@ M.config = {
             -- Setup mason-lspconfig to manage servers.
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    'bashls', 'pyright', 'biome', 'cssls', 'ts_ls', 'lua_ls',
-                    'eslint', 'jsonls', 'html', 'dockerls', 'ansiblels',
-                    'texlab', 'yamlls', 'tailwindcss', 'taplo',
-                },
-                handlers = {
-                    -- Default handler for servers without custom setup.
-                    function(server_name)
-                        lspconfig[server_name].setup({
-                            on_attach = on_attach,
-                            capabilities = capabilities,
-                        })
-                    end,
+                    'bashls',
+                    'pyright',
+                    'biome',
+                    'lua_ls',
+                    'jsonls',
+                    'html',
+                    'dockerls',
+                    'ansiblels',
+                    'texlab',
+                    'yamlls',
+                    'taplo',
                 },
             })
 
+            vim.lsp.config('*', {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            })
             -- Apply global configurations
             configure_doc_and_signature()
             configure_lsp_keybinds()
