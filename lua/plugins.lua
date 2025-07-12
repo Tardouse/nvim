@@ -47,8 +47,7 @@ require("lazy").setup({
     -- require("plugins.yazi"),
     require("plugins.ranger"),
     require("plugins.copilot"),
-    require("plugins.translate"),
+    -- require("plugins.translate"),
     require("plugins.fun"),
-    require("plugins.gpt"),
-    -- require("plugins.google_ai"),
+    require("plugins.gemini"),
 })
