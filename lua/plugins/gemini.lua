@@ -1,5 +1,7 @@
 return {
     'gera2ld/ai.nvim',
+    keys = { "<leader>sw" },
+    cmd = "AITranslate",
     dependencies = 'nvim-lua/plenary.nvim',
     opts = {
         ---- AI's answer is displayed in a popup buffer
@@ -25,5 +27,4 @@ return {
         },
     },
     vim.keymap.set({ 'n', 'v' }, '<leader>sw', ':AITranslate<CR>', { silent = true, nowait = true }),
-    event = 'VeryLazy',
 }
