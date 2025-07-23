@@ -1,4 +1,4 @@
-vim.lsp.config('yamlls', {
+return {
     settings = {
         redhat = { telemetry = { enabled = false } },
         yaml = {
@@ -19,4 +19,4 @@ vim.lsp.config('yamlls', {
     --         title = "LSP Notification"
     --     })
     -- end,
-})
+}
