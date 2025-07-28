@@ -40,6 +40,7 @@ require("lazy").setup({
     require("plugins.markdown"),
     require("plugins.yank"),
     require("plugins.FileProcess"),
+    require("plugins.flash"),
     require("plugins.tex"),
     require("plugins.winbar"),
     require("plugins.window-management"),
