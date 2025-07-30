@@ -92,7 +92,6 @@ local function configure_format_on_save()
         terraform = false,
         tex = true,
         toml = true,
-        python = true,
         sh = true,
     }
 
@@ -224,7 +223,7 @@ M.config = {
             -- Apply global configurations
             configure_doc_and_signature()
             configure_lsp_keybinds()
-            configure_format_on_save()
+            -- configure_format_on_save()
         end,
     },
 }

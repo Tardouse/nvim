@@ -7,8 +7,8 @@ return {
 	{
 		"nyngwang/NeoZoom.lua",
 		config = function()
-			vim.keymap.set('n', '<leader>f', ':NeoZoomToggle<CR>', { silent = true, nowait = true })
-			require('neo-zoom').setup {
+			vim.keymap.set("n", "<leader>fn", ":NeoZoomToggle<CR>", { silent = true, nowait = true })
+			require("neo-zoom").setup({
 				popup = { enabled = true }, -- this is the default.
 				-- NOTE: Add popup-effect (replace the window on-zoom with a `[No Name]`).
 				-- EXPLAIN: This improves the performance, and you won't see two
@@ -18,7 +18,7 @@ return {
 				--   exclude_filetypes = {},
 				--   exclude_buftypes = {},
 				-- },
-				exclude_buftypes = { 'terminal' },
+				exclude_buftypes = { "terminal" },
 				-- exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf' },
 				winopts = {
 					offset = {
@@ -29,7 +29,7 @@ return {
 						height = 1.0,
 					},
 					-- NOTE: check :help nvim_open_win() for possible border values.
-					border = 'thicc', -- this is a preset, try it :)
+					border = "thicc", -- this is a preset, try it :)
 				},
 				presets = {
 					-- {
@@ -40,13 +40,15 @@ return {
 					-- 	},
 					-- },
 					{
-						filetypes = { 'markdown' },
+						filetypes = { "markdown" },
 						callbacks = {
-							function() vim.wo.wrap = true end,
+							function()
+								vim.wo.wrap = true
+							end,
 						},
 					},
 				},
-			}
-		end
-	}
+			})
+		end,
+	},
 }

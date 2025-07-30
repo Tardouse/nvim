@@ -32,6 +32,7 @@ require("lazy").setup({
     require("plugins.editor"),
     require("plugins.wilder"),
     require("plugins.snippets"),
+    require("plugins.formatter"),
     require("plugins.autocomplete").config,
     require("plugins.debugger"),
     require("plugins.lspconfig").config,
