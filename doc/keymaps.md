@@ -165,7 +165,6 @@ builtin keymap:
 | Key        | Mode          | Action | description      |
 | ---        | ---           | ---    | ---              |
 | \<leader\>sw | Normal/Visual | -      | translate word   |
-| \<leader\>sr | Normal/Visual | -      | translate region |
 
 
 ### Undo
@@ -189,7 +188,11 @@ builtin keymap:
 | ---       | ---    | ---    | ---         |
 | \<leader\>y | Normal | `:Telescope neoclip<CR>`      | neoclip     |
 
-### google_ai
-| Key   | Mode            | Action | description |
-| ---   | ---             | ---    | ---         |
-| \<Tab\> | Normal & insert |        | accept      |
+### flash
+| Key     | Mode            | Action                              | description         |
+| ---     | ---             | ---                                 | ---                 |
+| f       | Normal/Visual   | `require("flas").jump`              | Flash               |
+| F       | Normal/Visual   | `require("flas").treesitter`        | Flash Treesitter    |
+| r       | Operator        | `require("flas").remote`            | Remote Flash        |
+| R       | Operator/Visual | `require("flas").treesitter_search` | Treesitter Search   |
+| \<C-s\> | Command         | `require("flas").toggle`            | Toggle Flash Search |
