@@ -39,7 +39,7 @@ return {
 						bufnr = bufnr,
 						async = false,
 						lsp_fallback = true,
-						timeout_ms = 500,
+						timeout_ms = 5000,
 					})
 				end,
 			})
