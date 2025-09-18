@@ -6,7 +6,7 @@ return {
 		config = function()
 			local conform = require("conform")
 
-			local format_on_save_enabled = true
+			local format_on_save_enabled = false
 
 			conform.setup({
 				formatters_by_ft = {
