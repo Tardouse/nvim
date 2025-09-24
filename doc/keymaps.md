@@ -164,7 +164,7 @@ builtin keymap:
 ### translate
 | Key        | Mode          | Action | description      |
 | ---        | ---           | ---    | ---              |
-| \<leader\>sw | Normal/Visual | -      | translate word   |
+| \<leader\>fw | Normal/Visual | -      | translate word   |
 
 
 ### Undo
@@ -180,7 +180,7 @@ builtin keymap:
 ### window-management
 | Key       | Mode   | Action | description |
 | ---       | ---    | ---    | ---         |
-| \<leader\>f | Normal | -      | toggle zoom |
+| \<leader\>fz | Normal | -      | toggle zoom |
 
 
 ### yank
