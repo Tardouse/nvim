@@ -27,5 +27,5 @@ return {
 			-- proxy = '',
 		},
 	},
-	vim.keymap.set({ "n", "v" }, "<leader>sw", ":AITranslate<CR>", { silent = true, nowait = true }),
+	vim.keymap.set({ "n", "v" }, "<leader>ft", ":AITranslate<CR>", { silent = true, nowait = true }),
 }
