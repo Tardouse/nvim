@@ -19,8 +19,34 @@ util.make_position_params = function(win, offset_encoding)
 end
 -- ***************************************************
 
+----------------------- fcitx4 ---------------------
+-- 记录上次输入法状态（1=英文，2=中文）
+local fcitx_state = tonumber(vim.fn.system("fcitx-remote"))
+
+-- 离开插入模式时：记录当前状态并关闭输入法
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    fcitx_state = tonumber(vim.fn.system("fcitx-remote"))
+    if fcitx_state == 2 then
+      vim.fn.system("fcitx-remote -c") -- 关闭输入法
+    end
+  end,
+})
+
+-- 进入插入模式时：如果上次是中文，就恢复输入法
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    if fcitx_state == 2 then
+      vim.fn.system("fcitx-remote -o") -- 恢复输入法
+    end
+  end,
+})
+----------------------------------------------------
+
+
 require("defaults")
 require("keymaps")
 require("plugins")
 
 -- setup colorscheme
+
