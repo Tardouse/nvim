@@ -191,8 +191,8 @@ builtin keymap:
 ### flash
 | Key     | Mode            | Action                              | description         |
 | ---     | ---             | ---                                 | ---                 |
-| s       | Normal/Visual   | `require("flas").jump`              | Flash               |
-| S       | Normal/Visual   | `require("flas").treesitter`        | Flash Treesitter    |
+| f       | Normal/Visual   | `require("flas").jump`              | Flash               |
+| F       | Normal/Visual   | `require("flas").treesitter`        | Flash Treesitter    |
 | r       | Operator        | `require("flas").remote`            | Remote Flash        |
 | R       | Operator/Visual | `require("flas").treesitter_search` | Treesitter Search   |
 | \<C-s\> | Command         | `require("flas").toggle`            | Toggle Flash Search |
