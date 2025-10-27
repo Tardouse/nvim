@@ -135,6 +135,8 @@ vim.lsp.config("texlab", {
 				forwardSearchAfter = true,
 			},
 			forwardSearch = {
+				-- executable = "okular",
+				-- args = {"--unique", "file:%p#src:%l%f" },
 				executable = "zathura",
 				args = { "--synctex-forward", "%l:1:%f", "%p" },
 			},
