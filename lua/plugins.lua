@@ -51,5 +51,6 @@ require("lazy").setup({
 	require("plugins.copilot"),
 	-- require("plugins.translate"),
 	require("plugins.fun"),
+    require("plugins.tagbar"),
 	require("plugins.gemini"),
 })
