@@ -1,198 +1,332 @@
-# Keymap
+# Neovim Keymaps Reference
 
-## Global keymap
-| Key          | Mode   | Action                                 | description            |
-| ---          | ---    | ---                                    | ---                    |
-| \<Esc\>        | Normal | `<cmd>nohlsearch<CR>`                  | Clear search highlight |
-| \\w          | Normal | `:lua print(vim.fn.expand('%:p'))<CR>` | Print full path        |
-| \<C-t\>        | Normal | `:NERDTreeToggle<CR>`                   | Toggle NERDTree        |
-| \<C-j\>        | Normal | `:set paste<CR>o<Esc>:set nopaste<CR>` | Insert line below |
-| "tp"         | Normal | `:bprevious<CR>`                       | Switch to previous buf |
-| "tn"         | Normal | `:bnext<CR>`                           | Switch to next buf     |
-| "td"         | Normal | `:bd<CR>`                              | Close current buf      |
-| "\<leader\>dg" | Normal | `:diffget<CR>`                         | diffget                |
-| "\<leader\>dp" | Normal | `:diffput<CR>`                         | diffput                |
+> Leader key: `<Space>`
 
+## Table of Contents
 
-## Specific Plugin keymap 
+- [Global Keymaps](#global-keymaps)
+- [Buffer Management](#buffer-management)
+- [LSP](#lsp)
+- [Search & Navigation](#search--navigation)
+- [Git](#git)
+- [Debugger](#debugger)
+- [File Explorer](#file-explorer)
+- [Editing](#editing)
+- [Markdown](#markdown)
+- [Miscellaneous](#miscellaneous)
 
-### AutoCompletion
-| Key   | Mode   | Action | description |
-| ---   | ---    | ---    | ---         |
-| \<C-f\> | Insert | -      | close cmp   |
-| \<C-o\> | Insert | -      | open cmp    |
+---
 
-### vim-commentary
-| Key | Mode   | Action | description               |
-| --- | ---    | ---    | ---                       |
-| gc  | Normal | -      | Toggle comment            |
-| gcc | Normal | -      | Toggle comment out a line |
+## Global Keymaps
 
-### copilot
-| Key   | Mode   | Action | description           |
-| ---   | ---    | ---    | ---                   |
-| \<Tab\> | Insert |        | accept the suggestion |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<Esc>` | Normal | Clear search highlight |
+| `\\w` | Normal | Print full path of current file |
+| `<C-t>` | Normal | Toggle NERDTree |
+| `<C-j>` | Normal | Insert line below (paste mode) |
+| `<leader>dg` | Normal | diffget |
+| `<leader>dp` | Normal | diffput |
 
-### debugger
-| Key       | Mode   | Action | description             |
-| ---       | ---    | ---    | ---                     |
-| \<leader\>os      | Normal | -      | Start/Continue          |
-| \<leader\>ok      | Normal | -      | Step Into               |
-| \<leader\>oj      | Normal | -      | Step Over               |
-| \<leader\>ol      | Normal | -      | Step Out                |
-| \<leader\>ob      | Normal | -      | Toggle Breakpoint       |
-| \<leader\>oB      | Normal | -      | Set Breakpoint          |
-| \<leader\>op      | Normal | -      | See last session result |
+## Buffer Management
 
-### editor
-| Key | Mode   | Action | description    |
-| --- | ---    | ---    | ---            |
-| za  | Normal | -      | Toggle fold    |
-| zc  | Normal | -      | Close fold     |
-| zo  | Normal | -      | Open fold      |
-| zM  | Normal | -      | Close all fold |
-| zR  | Normal | -      | Open all fold  |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `tp` | Normal | Previous buffer |
+| `tn` | Normal | Next buffer |
+| `td` | Normal | Delete current buffer |
 
-### fun
-| Key        | Mode | Action | description       |
-| ---        | ---  | ---    | ---               |
-| \<leader\>rr | -    | -      | display rain code |
+---
 
-### fzf
-| Key   | Mode   | Action | description                       |
-| ---   | ---    | ---    | ---                               |
-| \<C-f\> | Normal | -      | fzf contents                      |
-| \<C-f\> | Visual | -      | fzf contents via visual selection |
+## LSP
 
-builtin keymap:
-| Key      | Mode | Action | description         |
-| ---      | ---  | ---    | ---                 |
-| \<C-f\>    | -    | -      | toggle-fullscreen   |
-| \<C-r\>    | -    | -      | toggle-preview-wrap |
-| \<C-p\>    | -    | -      | toggle-preview      |
-| \<C-n\>    | -    | -      | preview-page-down   |
-| \<C-u\>    | -    | -      | preview-page-up     |
-| \<S-left\> | -    | -      | preview-page-reset  |
-| \<Esc\>      | -    | -      | abort               |
-| \<C-j\>   | -    | -      | down                |
-| \<C-k\>   | -    | -      | up                  |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>hd` | Normal | Show hover documentation |
+| `<C-l>` | Normal | Go to definition |
+| `<leader>hi` | Normal | Go to implementation |
+| `<leader>ho` | Normal | Go to type definition |
+| `<leader>hr` | Normal | Show references |
+| `<C-f>` | Insert | Show signature help |
+| `<leader>rn` | Normal | Rename symbol |
+| `<leader>aw` | Normal | Code action menu |
+| `<leader>ht` | Normal | Toggle Trouble diagnostics |
+| `<leader>-` | Normal | Go to previous diagnostic |
+| `<leader>=` | Normal | Go to next diagnostic |
 
-### git
-| Key        | Mode | Action | description |
-| ---        | ---  | ---    | ---         |
-| \<leader\>lz | -    | -      | lazygit     |
-| \<leader\>gp | -    | -      | prev_hunk   |
-| \<leader\>gn | -    | -      | next_hunk   |
-| \<leader\>gr | -    | -      | reset_hunk  |
-| \<leader\>gb | -    | -      | blame_line  |
+---
 
-### lsp
-| Key       | Mode   | Action | description          |
-| ---       | ---    | ---    | ---                  |
-| \<leader\>hd| Normal | -      | show documentation   |
-| \<C-l\>     | Normal | -      | go to definition     |
-| \<leader\>hi| Normal | -      | go to implementation  |
-| \<leader\>ho| Normal | -      | go to type definition |
-| \<leader\>hr| Normal | -      | show references      |
-| \<C-f\>     | Insert | -      | show signature help  |
-| \<leader\>rn| Normal | -      | rename symbol        |
-| \<leader\>aw| Normal | -      | code action menu     |
-| \<leader\>ht| Normal | -      | toggle trouble       |
-| \<leader\>- | Normal | -      | goto prev diagnostic |
-| \<leader\>= | Normal | -      | goto next diagnostic |
+## Search & Navigation
 
-### markdown
-| Key        | Mode   | Action | description          |
-| ---        | ---    | ---    | ---                  |
-| \<leader\>mp | Normal | -      | toggle markdown view |
-| \<leader\>mt | Normal | -      | toggle table mode    |
-| \<leader\>mg | Normal | -      | generate toc         |
-| \<leader\>mc | Normal | -      | update toc           |
+### Telescope
 
-### vim-visual-multi
-| Key   | Mode   | Action | description |
-| ---   | ---    | ---    | ---         |
-| \<C-n\> | Normal | -      | start multi |
-| \<C-n\> | Visual | -      | start multi |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>tf` | Normal | Find files |
+| `<leader>rs` | Normal | Resume last search |
+| `<leader>tb` | Normal | List buffers |
+| `<leader>to` | Normal | Old files (recent) |
+| `<leader>tz` | Normal | Fuzzy find in current buffer |
+| `<leader>td` | Normal | Diagnostics |
+| `<leader>tg` | Normal | Git status |
+| `<leader>t.` | Normal | Commands |
 
-### ranger
-| Key   | Mode   | Action | description   |
-| ---   | ---    | ---    | ---           |
-| \<M-o\> | Normal | -      | toggle ranger |
+**Telescope Insert Mode:**
 
-builtin keymap:
-| Key   | Mode | Action | description                 |
-| ---   | ---  | ---    | ---                         |
-| \<C-t\> | -    | -      | open in tab                 |
-| \<C-x\> | -    | -      | open in split               |
-| \<C-v\> | -    | -      | open in vsplit              |
-| gw    | -    | -      | jump to cwd                 |
-| yw    | -    | -      | emit ranger cwd and jump it |
+| Key | Description |
+|-----|-------------|
+| `<C-h>` | Show which_key help |
+| `<C-j>` | Move selection next |
+| `<C-k>` | Move selection previous |
+| `<C-f>` | Preview scroll up |
+| `<C-b>` | Preview scroll down |
+| `<C-n>` | Cycle history next |
+| `<C-p>` | Cycle history prev |
+| `<C-d>` | Delete buffer (in buffers picker) |
 
+### FZF
 
-### nvim-surround
-| Key | Mode   | Action | description |
-| --- | ---    | ---    | ---         |
-| ys  | Normal | -      | surround    |
-| cs  | Normal | -      | change      |
-| ds  | Normal | -      | delete      |
-| S   | Visual | -      | surround    |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<C-f>` | Normal | Grep search |
+| `<C-f>` | Visual | Grep visual selection |
 
-### telescope
-| Key        | Mode   | Action | description          |
-| ---        | ---    | ---    | ---                  |
-| \<leader\>tf | Normal | -      | find files           |
-| \<leader\>rs | Normal | -      | resume               |
-| \<leader\>tb | Normal | -      | buffers              |
-| \<leader\>to | Normal | -      | oldfiles             |
-| \<leader\>tz | Normal | -      | current_buffer_fuzzy |
-| \<leader\>ts | Normal | -      | spell_suggest        |
-| \<leader\>td | Normal | -      | diagnostics          |
-| \<leader\>tg | Normal | -      | git_status           |
-| \<leader\>t. | Normal | -      | commands             |
+**FZF Built-in:**
 
+| Key | Description |
+|-----|-------------|
+| `<C-f>` | Toggle fullscreen |
+| `<C-r>` | Toggle preview wrap |
+| `<C-p>` | Toggle preview |
+| `<C-n>` | Preview page down |
+| `<C-u>` | Preview page up |
+| `<S-left>` | Preview page reset |
+| `Esc` | Abort |
+| `Ctrl-j` | Down |
+| `Ctrl-k` | Up |
 
-### tex
+### Flash (Motion)
 
+| Key | Mode | Description |
+|-----|------|-------------|
+| `f` | Normal/Visual/Operator | Flash jump |
+| `F` | Normal/Visual/Operator | Flash Treesitter |
+| `r` | Operator | Remote Flash |
+| `R` | Operator/Visual | Treesitter Search |
+| `<C-s>` | Command | Toggle Flash Search |
 
-### toggle-bool
-| Key       | Mode   | Action | description |
-| ---       | ---    | ---    | ---         |
-| \<leader\>s | Normal | -      | toggle bool |
+### Commander
 
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<C-q>` | Normal | Open command palette |
 
-### translate
-| Key        | Mode          | Action | description      |
-| ---        | ---           | ---    | ---              |
-| \<leader\>fw | Normal/Visual | -      | translate word   |
+### Tagbar
 
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>t8` | Normal | Toggle Tagbar |
 
-### Undo
-| Key | Mode   | Action | description |
-| --- | ---    | ---    | ---         |
-| tu  | Normal | -      | undo tree   |
+---
 
-### winbar
-| Key       | Mode   | Action | description |
-| \<leader\>; | Normal | -      | pick        |
+## Git
 
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>lz` | Normal | Open LazyGit |
+| `<leader>gp` | Normal | Previous hunk |
+| `<leader>gn` | Normal | Next hunk |
+| `<leader>gr` | Normal | Reset hunk |
+| `<leader>gb` | Normal | Blame line |
 
-### window-management
-| Key       | Mode   | Action | description |
-| ---       | ---    | ---    | ---         |
-| \<leader\>fz | Normal | -      | toggle zoom |
+---
 
+## Debugger (DAP)
 
-### yank
-| Key       | Mode   | Action | description |
-| ---       | ---    | ---    | ---         |
-| \<leader\>y | Normal | `:Telescope neoclip<CR>`      | neoclip     |
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>os` | Normal | Start/Continue |
+| `<leader>oj` | Normal | Step Over |
+| `<leader>ok` | Normal | Step Into |
+| `<leader>ol` | Normal | Step Out |
+| `<leader>ob` | Normal | Toggle Breakpoint |
+| `<leader>oB` | Normal | Set Conditional Breakpoint |
+| `<leader>op` | Normal | Toggle DAP UI |
 
-### flash
-| Key     | Mode            | Action                              | description         |
-| ---     | ---             | ---                                 | ---                 |
-| f       | Normal/Visual   | `require("flas").jump`              | Flash               |
-| F       | Normal/Visual   | `require("flas").treesitter`        | Flash Treesitter    |
-| r       | Operator        | `require("flas").remote`            | Remote Flash        |
-| R       | Operator/Visual | `require("flas").treesitter_search` | Treesitter Search   |
-| \<C-s\> | Command         | `require("flas").toggle`            | Toggle Flash Search |
+---
+
+## File Explorer
+
+### Ranger (rnvimr)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<M-o>` | Normal | Toggle Ranger |
+| `<M-o>` | Terminal | Toggle Ranger |
+| `<M-i>` | Terminal | Resize Ranger |
+| `<M-l>` | Terminal | Resize preset 1,8,9,11,5 |
+| `<M-y>` | Terminal | Resize preset 6 |
+
+**Ranger Built-in:**
+
+| Key | Description |
+|-----|-------------|
+| `<C-t>` | Open in new tab |
+| `<C-x>` | Open in split |
+| `<C-v>` | Open in vsplit |
+| `gw` | Jump to nvim cwd |
+| `yw` | Emit ranger cwd and jump |
+
+---
+
+## Editing
+
+### AutoCompletion (nvim-cmp)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<C-o>` | Insert | Open completion menu |
+| `<C-f>` | Insert | Close completion menu |
+| `<C-j>` | Insert | Select next item |
+| `<C-k>` | Insert | Select previous item |
+| `<CR>` | Insert | Confirm selection |
+
+### Surround (nvim-surround)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `ys{motion}{char}` | Normal | Add surround |
+| `cs{old}{new}` | Normal | Change surround |
+| `ds{char}` | Normal | Delete surround |
+| `S{char}` | Visual | Surround selection |
+| `yse` | Normal | Add LaTeX environment (tex only) |
+
+### Multi-Cursor (vim-visual-multi)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<C-n>` | Normal/Visual | Start multi-cursor |
+
+### Commentary
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `gc{motion}` | Normal | Toggle comment |
+| `gcc` | Normal | Toggle comment line |
+
+### Toggle Bool
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>s` | Normal | Toggle boolean value |
+
+### EasyAlign
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `ga{motion}` | Normal | Start EasyAlign |
+| `ga` | Visual | Start EasyAlign |
+
+### Formatter (Conform)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>ff` | Normal/Visual | Format file or range |
+| `<leader>fc` | Normal | Toggle format on save |
+
+### Folding (nvim-ufo)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `za` | Normal | Toggle fold |
+| `zc` | Normal | Close fold |
+| `zo` | Normal | Open fold |
+| `zM` | Normal | Close all folds |
+| `zR` | Normal | Open all folds |
+
+---
+
+## Markdown
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>mp` | Normal | Toggle Markdown preview |
+| `<leader>mt` | Normal | Toggle Table mode |
+| `<leader>mg` | Normal | Generate TOC (GFM) |
+| `<leader>mc` | Normal | Update TOC |
+
+---
+
+## Miscellaneous
+
+### Translate
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>ts` | Normal/Visual | Translate text |
+
+### Yank (Neoclip)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>y` | Normal | Open yank history |
+
+**Neoclip Telescope (Insert Mode):**
+
+| Key | Description |
+|-----|-------------|
+| `<CR>` | Select |
+| `<C-p>` | Paste |
+| `<C-k>` | Paste behind |
+| `<C-q>` | Replay macro |
+| `<C-d>` | Delete entry |
+| `<C-e>` | Edit entry |
+
+### Undo Tree
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `tu` | Normal | Toggle Undo tree |
+
+### Window Management
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>fz` | Normal | Toggle zoom (NeoZoom) |
+
+### Winbar (Dropbar)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>;` | Normal | Pick from winbar |
+
+### Fun
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>rr` | Normal | Make it rain (Cellular Automaton) |
+
+### Copilot
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<Tab>` | Insert | Accept suggestion (default) |
+
+---
+
+## Quick Reference Card
+
+### Most Used
+
+| Key | Description |
+|-----|-------------|
+| `<leader>tf` | Find files |
+| `<C-f>` | Grep search |
+| `<C-l>` | Go to definition |
+| `<leader>aw` | Code action |
+| `<leader>ff` | Format |
+| `<leader>lz` | LazyGit |
+| `f` | Flash jump |
+| `<M-o>` | Ranger |
+| `<C-t>` | NERDTree |
+| `<C-q>` | Command palette |
