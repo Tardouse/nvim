@@ -3,7 +3,7 @@ return {
 	name = "translate.nvim",
     cmd = { "Translate", "TranslateToEN", "TranslateToCN", "TranslateToggle" },
 	keys = {
-		{ "<leader>ft", "<cmd>Translate<cr>", mode = { "n", "v" }, desc = "Translate" },
+		{ "<leader>ts", "<cmd>Translate<cr>", mode = { "n", "v" }, desc = "Translate" },
 	},
 	opts = {
 		backend = "claude", -- openai, gemini, claude, deepseek
