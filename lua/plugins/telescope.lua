@@ -30,7 +30,7 @@ M.config = {
 			vim.keymap.set('n', '<leader>tb', builtin.buffers, m)
 			vim.keymap.set('n', '<leader>to', builtin.oldfiles, m)
 			vim.keymap.set('n', '<leader>tz', builtin.current_buffer_fuzzy_find, m)
-			vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, m)
+			-- vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, m)
 
 			vim.keymap.set('n', '<leader>td', function()
 				builtin.diagnostics({
