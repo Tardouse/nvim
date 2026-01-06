@@ -1,16 +1,41 @@
 return {
-	{
-		"voldikss/vim-translator",
-		init = function()
-			-- 设置翻译源语言和目标语言（可以根据需要调整）
-			vim.g.translator_default_from = "auto"
-			vim.g.translator_default_to = "zh"
-
-			-- 设置快捷键 <leader>sw 用于翻译
-			vim.api.nvim_set_keymap('n', '<leader>sw', ':TranslateW<CR>', { noremap = true, silent = true })
-			vim.api.nvim_set_keymap('v', '<leader>sw', ':TranslateW<CR>', { noremap = true, silent = true })
-			vim.api.nvim_set_keymap('n', '<leader>sr', ':TranslateR<CR>', { noremap = true, silent = true })
-			vim.api.nvim_set_keymap('v', '<leader>sr', ':TranslateR<CR>', { noremap = true, silent = true })
-		end
-	}
+	dir = "/home/jesse/Downloads/translate.nvim",
+	name = "translate.nvim",
+    cmd = { "Translate", "TranslateToEN", "TranslateToCN", "TranslateToggle" },
+	keys = {
+		{ "<leader>ft", "<cmd>Translate<cr>", mode = { "n", "v" }, desc = "Translate" },
+	},
+	opts = {
+		backend = "claude", -- openai, gemini, claude, deepseek
+		backends = {
+			openai = {
+				api_key = "xxx",
+                url="",
+                model="",
+			},
+			gemini = {
+				api_key = "xxx",
+                url="",
+                model="",
+			},
+			claude = {
+				api_key = "xxx",
+                url="",
+                model="",
+			},
+			deepseek = {
+				api_key = "xxx",
+                url="",
+                model="",
+			},
+		},
+		ui = {
+			width = 60,
+			height = 10,
+			border = "rounded",
+		},
+		config = function(_, opts)
+			require("translate").setup(opts)
+		end,
+	},
 }
