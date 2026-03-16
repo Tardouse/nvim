@@ -21,14 +21,14 @@ end
 
 ----------------------- fcitx4 ---------------------
 -- 记录上次输入法状态（1=英文，2=中文）
-local fcitx_state = tonumber(vim.fn.system("fcitx-remote"))
+local fcitx_state = tonumber(vim.fn.system("fcitx5-remote"))
 
 -- 离开插入模式时：记录当前状态并关闭输入法
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    fcitx_state = tonumber(vim.fn.system("fcitx-remote"))
+    fcitx_state = tonumber(vim.fn.system("fcitx5-remote"))
     if fcitx_state == 2 then
-      vim.fn.system("fcitx-remote -c") -- 关闭输入法
+      vim.fn.system("fcitx5-remote -c") -- 关闭输入法
     end
   end,
 })
@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
     if fcitx_state == 2 then
-      vim.fn.system("fcitx-remote -o") -- 恢复输入法
+      vim.fn.system("fcitx5-remote -o") -- 恢复输入法
     end
   end,
 })
