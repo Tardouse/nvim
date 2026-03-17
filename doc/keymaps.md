@@ -47,7 +47,7 @@
 | `<leader>hi` | Normal | Go to implementation |
 | `<leader>ho` | Normal | Go to type definition |
 | `<leader>hr` | Normal | Show references |
-| `<C-f>` | Insert | Show signature help |
+| `<M-f>` | Insert | Show signature help |
 | `<leader>rn` | Normal | Rename symbol |
 | `<leader>aw` | Normal | Code action menu |
 | `<leader>ht` | Normal | Toggle Trouble diagnostics |
