@@ -134,7 +134,7 @@ M.config = {
                 "folke/trouble.nvim",
                 opts = { use_diagnostic_signs = true, action_keys = { close = "<esc>", previous = "k", next = "j" } },
             },
-            { 'williamboman/mason.nvim',          build = function() vim.cmd([[MasonInstall]]) end },
+            { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'j-hui/fidget.nvim',                tag = 'legacy' },
@@ -155,8 +155,25 @@ M.config = {
             require('fidget').setup({})
             require('nvim-dap-projects').search_project_config()
 
-            local lspconfig = require('lspconfig')
+            pcall(function()
+                require('neodev').setup({})
+            end)
+
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local servers = {
+                'bashls',
+                'pyright',
+                'biome',
+                'lua_ls',
+                'jsonls',
+                'html',
+                'dockerls',
+                'ansiblels',
+                'texlab',
+                'yamlls',
+                'taplo',
+                'ts_ls',
+            }
 
             -- Shared on_attach function for all LSP servers.
             local function on_attach(client, bufnr)
@@ -168,9 +185,6 @@ M.config = {
 
                 -- Disable semantic tokens for performance, if not needed.
                 client.server_capabilities.semanticTokensProvider = nil
-
-                -- Attach other plugins' functionality.
-                require('plugins.autocomplete').configfunc()
                 require('lsp_signature').on_attach({
                     bind = true,
                     handler_opts = { border = "rounded" }
@@ -201,25 +215,37 @@ M.config = {
             })
             -- Setup mason-lspconfig to manage servers.
             require('mason-lspconfig').setup({
-                ensure_installed = {
-                    'bashls',
-                    'pyright',
-                    'biome',
-                    'lua_ls',
-                    'jsonls',
-                    'html',
-                    'dockerls',
-                    'ansiblels',
-                    'texlab',
-                    'yamlls',
-                    'taplo',
-                },
+                ensure_installed = servers,
             })
 
             vim.lsp.config('*', {
                 on_attach = on_attach,
                 capabilities = capabilities,
             })
+
+            local local_lsp_dir = vim.fs.joinpath(vim.fn.stdpath('config'), 'lsp')
+            for _, path in ipairs(vim.fn.glob(local_lsp_dir .. '/*.lua', false, true)) do
+                local server = vim.fn.fnamemodify(path, ':t:r')
+                local ok, local_config = pcall(dofile, path)
+
+                if not ok then
+                    vim.notify(string.format('Failed to load local LSP config %s: %s', path, local_config), vim.log.levels.ERROR)
+                elseif type(local_config) == 'table' then
+                    local server_on_attach = local_config.on_attach
+                    local_config.on_attach = function(client, bufnr)
+                        on_attach(client, bufnr)
+                        if server_on_attach then
+                            server_on_attach(client, bufnr)
+                        end
+                    end
+                    vim.lsp.config(server, local_config)
+                end
+            end
+
+            for _, server in ipairs(servers) do
+                vim.lsp.enable(server)
+            end
+
             -- Apply global configurations
             configure_doc_and_signature()
             configure_lsp_keybinds()

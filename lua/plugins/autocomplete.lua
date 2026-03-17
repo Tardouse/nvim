@@ -22,8 +22,9 @@ end
 
 M.config = {
 	"hrsh7th/nvim-cmp",
-	after = "SirVer/ultisnips",
+	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
+		"SirVer/ultisnips",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-nvim-lsp",
@@ -46,6 +47,9 @@ M.config = {
 		}
 		-- "L3MON4D3/LuaSnip",
 	},
+	config = function()
+		M.configfunc()
+	end,
 }
 
 local setCompHL = function()
@@ -94,7 +98,6 @@ M.configfunc = function()
 	local lspkind = require("lspkind")
 	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 	local cmp = require("cmp")
-	local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 	-- local luasnip = require("luasnip")
 
 	setCompHL()
