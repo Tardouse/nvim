@@ -90,87 +90,92 @@ local function command_factory(cmd)
 	end
 end
 
-if vim.fn.exists(':TexlabToggleBuildOnSave') == 0 then
-	vim.api.nvim_create_user_command('TexlabToggleBuildOnSave', toggle_build_on_save, {
-		desc = 'Toggle automatic building on save for Texlab (Client-side)',
+if vim.fn.exists(":TexlabToggleBuildOnSave") == 0 then
+	vim.api.nvim_create_user_command("TexlabToggleBuildOnSave", toggle_build_on_save, {
+		desc = "Toggle automatic building on save for Texlab (Client-side)",
 	})
 end
 
-vim.keymap.set('n', '<leader>lt', '<Cmd>TexlabToggleBuildOnSave<CR>', {
+vim.keymap.set("n", "<leader>lt", "<Cmd>TexlabToggleBuildOnSave<CR>", {
 	noremap = true,
 	silent = true,
-	desc = '[L]SP [T]oggle OnSave Build',
+	desc = "[L]SP [T]oggle OnSave Build",
 })
 
 return {
-	cmd = { 'texlab' },
-	filetypes = { 'tex', 'plaintex', 'bib' },
-	root_markers = { '.git', '.latexmkrc', 'latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
+	cmd = { "texlab" },
+	filetypes = { "tex", "plaintex", "bib" },
+	root_markers = { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
 	settings = {
 		texlab = {
 			build = {
-				executable = 'latexmk',
-				args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
+				executable = "latexmk",
+				args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 				onSave = false,
 				forwardSearchAfter = true,
 			},
 			forwardSearch = {
-				executable = 'zathura',
-				args = { '--synctex-forward', '%l:1:%f', '%p' },
+				executable = "zathura",
+				args = { "--synctex-forward", "%l:1:%f", "%p" },
 			},
 			chktex = { onOpenAndSave = false, onEdit = false },
 			diagnosticsDelay = 300,
-			latexFormatter = 'latexindent',
+			latexFormatter = "latexindent",
 			latexindent = {
-				["local"] = vim.fn.stdpath('config') .. '/lsp/latexindent.yaml',
+				["local"] = vim.fn.stdpath("config") .. "/lsp/latexindent.yaml",
 				modifyLineBreaks = false,
 			},
-			bibtexFormatter = 'texlab',
+			bibtexFormatter = "texlab",
 			formatterLineLength = 80,
 		},
 	},
 	on_attach = function(_, bufnr)
-        vim.notify("texlab attached to buffer " .. bufnr, vim.log.levels.INFO, {
-            title = "LSP Notification"
-        })
-		vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabBuild', client_with_fn(buf_build), {
-			desc = 'Build the current buffer',
+		-- vim.notify("texlab attached to buffer " .. bufnr, vim.log.levels.INFO, {
+		--     title = "LSP Notification"
+		-- })
+		vim.api.nvim_buf_create_user_command(bufnr, "LspTexlabBuild", client_with_fn(buf_build), {
+			desc = "Build the current buffer",
 		})
-		vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabForward', client_with_fn(buf_search), {
-			desc = 'Forward search from current position',
+		vim.api.nvim_buf_create_user_command(bufnr, "LspTexlabForward", client_with_fn(buf_search), {
+			desc = "Forward search from current position",
 		})
-		vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabCancelBuild', client_with_fn(buf_cancel_build), {
-			desc = 'Cancel the current build',
+		vim.api.nvim_buf_create_user_command(bufnr, "LspTexlabCancelBuild", client_with_fn(buf_cancel_build), {
+			desc = "Cancel the current build",
 		})
-		vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabDependencyGraph', client_with_fn(dependency_graph), {
-			desc = 'Show the dependency graph',
+		vim.api.nvim_buf_create_user_command(bufnr, "LspTexlabDependencyGraph", client_with_fn(dependency_graph), {
+			desc = "Show the dependency graph",
 		})
-		vim.api.nvim_buf_create_user_command(bufnr, 'LspTexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
-			desc = 'Clean the artifacts',
-		})
+		vim.api.nvim_buf_create_user_command(
+			bufnr,
+			"LspTexlabCleanArtifacts",
+			client_with_fn(command_factory("Artifacts")),
+			{
+				desc = "Clean the artifacts",
+			}
+		)
 
 		local map = vim.keymap.set
-		local opts = { buffer = bufnr, desc = '' }
-		opts.desc = '[L]SP [B]uild'
-		map('n', '<leader>lb', '<Cmd>LspTexlabBuild<CR>', opts)
-		opts.desc = '[L]SP [S]earch'
-		map('n', '<leader>ls', '<Cmd>LspTexlabForward<CR>', opts)
+		local opts = { buffer = bufnr, desc = "" }
+		opts.desc = "[L]SP [B]uild"
+		map("n", "<leader>lb", "<Cmd>LspTexlabBuild<CR>", opts)
+		opts.desc = "[L]SP [S]earch"
+		map("n", "<leader>ls", "<Cmd>LspTexlabForward<CR>", opts)
 
-		local augroup = vim.api.nvim_create_augroup('TexlabUserAutoBuildOnSave' .. bufnr, { clear = true })
-		vim.api.nvim_create_autocmd('BufWritePost', {
+		local augroup = vim.api.nvim_create_augroup("TexlabUserAutoBuildOnSave" .. bufnr, { clear = true })
+		vim.api.nvim_create_autocmd("BufWritePost", {
 			group = augroup,
 			buffer = bufnr,
 			callback = function()
 				if build_on_save_is_enabled then
-					vim.notify('Auto-building document (client-side)...', vim.log.levels.INFO, { title = 'Texlab' })
+					vim.notify("Auto-building document (client-side)...", vim.log.levels.INFO, { title = "Texlab" })
 					vim.cmd.LspTexlabBuild()
 				end
 			end,
 		})
 
-		require('lsp_signature').on_attach({
+		require("lsp_signature").on_attach({
 			bind = true,
-			handler_opts = { border = 'rounded' },
+			handler_opts = { border = "rounded" },
 		}, bufnr)
 	end,
 }

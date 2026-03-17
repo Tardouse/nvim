@@ -131,15 +131,20 @@ M.configfunc = function()
 			maxwidth = 60,
 			maxheight = 10,
 			format = function(entry, vim_item)
-				local kind = lspkind.cmp_format({
-					mode = "symbol_text",
-					symbol_map = { Codeium = "", },
-				})(entry, vim_item)
-				local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				kind.kind = " " .. (strings[1] or "") .. " "
-				kind.menu = limitStr(entry:get_completion_item().detail or "")
+				local kind_icon = lspkind.symbolic(vim_item.kind)
+				local source_map = {
+					nvim_lsp = "[LSP]",
+					buffer = "[BUF]",
+					path = "[PATH]",
+					nvim_lua = "[LUA]",
+					calc = "[CALC]",
+					ultisnips = "[SNIP]",
+				}
 
-				return kind
+				vim_item.kind = " " .. (kind_icon ~= '' and kind_icon or vim_item.kind) .. " "
+				vim_item.menu = source_map[entry.source.name] or "[SRC]"
+
+				return vim_item
 			end,
 		},
 		sources = cmp.config.sources({
