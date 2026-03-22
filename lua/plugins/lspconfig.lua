@@ -285,7 +285,7 @@ M.config = {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local servers = {
 				"bashls",
-				"pyright",
+				-- "pyright",
 				"biome",
 				"lua_ls",
 				"jsonls",
