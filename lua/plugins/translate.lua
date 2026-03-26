@@ -19,9 +19,9 @@ return {
                 model="",
 			},
 			claude = {
-				api_key = "sk-ant-oat01-qzOpNk93oiu9EXImfEmparjhYcNkNHmm3onqiiUNOnvv9ivxrGx5SSgV4TNAGt-wLjcduJbAKRq-83QZ8X_7njMR_9H3QAA",
-                url="https://code.newcli.com/claude/droid/v1/messages",
-                model="claude-sonnet-4-5",
+				api_key = "",
+                url="",
+                model="",
 			},
 			deepseek = {
 				api_key = "xxx",
