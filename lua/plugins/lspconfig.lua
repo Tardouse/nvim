@@ -41,12 +41,12 @@ local function configure_lsp_keybinds()
 			vim.keymap.set("n", "<leader>=", function()
 				vim.diagnostic.jump({ count = 1, float = true })
 			end, opts)
-			vim.keymap.set("i", "<M-f>", function()
-				vim.lsp.buf.signature_help({
-					focusable = false,
-					zindex = 60,
-				})
-			end, opts)
+			-- vim.keymap.set("i", "<M-f>", function()
+			-- 	vim.lsp.buf.signature_help({
+			-- 		focusable = false,
+			-- 		zindex = 60,
+			-- 	})
+			-- end, opts)
 		end,
 	})
 end
@@ -308,10 +308,15 @@ M.config = {
 
 				-- Disable semantic tokens for performance, if not needed.
 				client.server_capabilities.semanticTokensProvider = nil
-				require("lsp_signature").on_attach({
+				require("lsp_signature").setup({
 					bind = true,
 					handler_opts = { border = "rounded" },
-				}, bufnr)
+                    hint_enable = true,
+                    floating_window = false,
+                    always_trigger = false,
+                    toggle_key = "<M-f>",
+                    toggle_key_flip_floatwin_setting = false,
+				})
 			end
 
 			-- Configure diagnostics
