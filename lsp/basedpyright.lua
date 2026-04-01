@@ -37,8 +37,8 @@ return {
 				useLibraryCodeForTypes = true,
 				typeCheckingMode = "strict",
 				diagnosticSeverityOverrides = {
-					reportMissingTypeStubs = "none",
-					reportUnknownParameterType = "none",
+					reportMissingTypeStubs = "warning",
+					reportUnknownParameterType = "warning",
 					reportUnknownMemberType = "warning",
 					reportUnknownVariableType = "warning",
 					reportUnknownArgumentType = "warning",
