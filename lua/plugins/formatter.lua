@@ -11,7 +11,7 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					python = { "isort", "black" },
+					python = { "ruff_format" },
 					javascript = { "prettier" },
 					typescript = { "prettier" },
 					json = { "prettier" },
