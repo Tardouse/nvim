@@ -1,14 +1,14 @@
 local m = { noremap = true }
 return {
     "ibhagwan/fzf-lua",
-    keys = { "<c-f>" },
+    keys = { "<leader>tz" },
     config = function()
         local fzf = require('fzf-lua')
-        vim.keymap.set('n', '<c-f>', function()
+        vim.keymap.set('n', '<leader>tz', function()
             -- fzf.live_grep_resume({ multiprocess = true, debug = true })
             fzf.grep({ search = "", fzf_opts = { ['--layout'] = 'default' } })
         end, m)
-        vim.keymap.set('x', '<c-f>', function()
+        vim.keymap.set('x', '<leader>tz', function()
             -- fzf.live_grep_resume({ multiprocess = true, debug = true })
             fzf.grep_visual({ fzf_opts = { ['--layout'] = 'default' } })
         end, m)

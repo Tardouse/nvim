@@ -66,7 +66,7 @@
 | `<leader>rs` | Normal | Resume last search |
 | `<leader>tb` | Normal | List buffers |
 | `<leader>to` | Normal | Old files (recent) |
-| `<leader>tz` | Normal | Fuzzy find in current buffer |
+| `<c-f>` | Normal | Fuzzy find in current buffer |
 | `<leader>td` | Normal | Diagnostics |
 | `<leader>tg` | Normal | Git status |
 | `<leader>t.` | Normal | Commands |
@@ -321,7 +321,7 @@
 | Key | Description |
 |-----|-------------|
 | `<leader>tf` | Find files |
-| `<C-f>` | Grep search |
+| `<leader>tz` | Grep search |
 | `<C-l>` | Go to definition |
 | `<leader>aw` | Code action |
 | `<leader>ff` | Format |
