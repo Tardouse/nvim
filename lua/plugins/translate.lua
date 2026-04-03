@@ -1,17 +1,19 @@
 return {
     "Tardouse/translate.nvim",
+	-- dir = "/home/jesse/Code/translate.nvim",
 	name = "translate.nvim",
-    cmd = { "Translate", "TranslateToEN", "TranslateToCN", "TranslateToggle" },
+    cmd = { "Translate", "TranslateToEN", "TranslateToCN" },
 	keys = {
 		{ "<leader>ts", "<cmd>Translate<cr>", mode = { "n", "v" }, desc = "Translate" },
 	},
 	opts = {
-		backend = "claude", -- openai, gemini, claude, deepseek
+		backend = "google", -- openai, gemini, claude, deepseek
+        default_target_lang = "zh-CN",
 		backends = {
 			openai = {
 				api_key = "xxx",
                 url="",
-                model="",
+                model="gpt-5.2",
 			},
 			gemini = {
 				api_key = "xxx",

@@ -66,7 +66,7 @@
   "telescope-simulators.nvim": { "branch": "main", "commit": "4f3c30258cd31c57b581cfe98f23c61324a33f39" },
   "telescope.nvim": { "branch": "master", "commit": "5255aa27c422de944791318024167ad5d40aad20" },
   "tokyonight.nvim": { "branch": "main", "commit": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6" },
-  "translate.nvim": { "branch": "main", "commit": "1f4f6eea00a3bdaf0e60da0197b96f3433dd9698" },
+  "translate.nvim": { "branch": "main", "commit": "81b795c9e98d757d3cb7866bab8a8da7f7a1192a" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "ultisnips": { "branch": "master", "commit": "34d3ef028f19d34106b4eeadeb6c11b249e26887" },
   "undotree": { "branch": "master", "commit": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d" },
