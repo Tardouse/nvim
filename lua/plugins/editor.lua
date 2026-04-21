@@ -48,12 +48,6 @@ return {
 		end
 	},
 	{
-		-- auto add list bullets for markdown and text files
-		"dkarter/bullets.vim",
-		lazy = false,
-		ft = { "markdown", "txt" },
-	},
-	{
 		-- display the color of the hex code in the buffer
 		"NvChad/nvim-colorizer.lua",
 		opts = {
