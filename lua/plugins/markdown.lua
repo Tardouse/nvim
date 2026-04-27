@@ -198,6 +198,39 @@ return {
 				echo_url = true,
 			},
 
+			upload = {
+				-- [CN] 交给 PicGo 现有的 rename-file 插件处理文件名，避免和 md-tool 重复改名。
+				-- [CN] 可选值: `nil`、模板字符串或 Lua 函数。
+				filename = "{origin}-{y}{m}{d}{h}{i}{s}",
+
+				picgo = {
+					-- [CN] PicGo CLI 可执行文件。
+					-- [CN] 可选值: `"picgo"` 或任意可执行文件路径。
+					command = "picgo",
+
+					-- [CN] 直接在插件配置里内联 PicGo 图床设置，便于脱离默认 PicGo 配置单独测试。
+					config = {
+						picBed = {
+							current = "aliyun",
+							aliyun = {
+								accessKeyId = "",
+								accessKeySecret = "",
+								bucket = "picture-for-upload",
+								area = "oss-cn-beijing",
+								path = "markdown/",
+								customUrl = "",
+								options = "",
+							},
+							uploader = "aliyun",
+							transformer = "path",
+						},
+						settings = {
+							language = "zh-CN",
+						},
+					},
+				},
+			},
+
 			table = {
 				-- [CN] 是否默认启用 table mode。
 				-- [CN] 开启后会为 Markdown buffer 注册表格编辑辅助，并在编辑当前表格时自动格式化。
@@ -280,6 +313,7 @@ return {
 			{ "<leader>mc", "<cmd>MDTtocUpdate<cr>", desc = "Markdown TOC Update" },
 			{ "<leader>ml", "<cmd>MDTlistToggle<cr>", desc = "Markdown List Toggle" },
 			{ "<leader>mr", "<cmd>MDTrenderToggle<cr>", desc = "Markdown Render Toggle" },
+			{ "<leader>mu", "<cmd>MDTupload<cr>", desc = "Markdown Upload Image" },
 		},
 	},
 }
