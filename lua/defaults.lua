@@ -37,3 +37,17 @@ vim.opt.undofile = true
 if vim.fn.has("clipboard") then
 	vim.opt.clipboard = "unnamedplus"
 end
+
+if vim.fn.exists('$SSH_TTY') ~= 0 then
+    vim.g.clipboard = {
+        name = 'osc52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
+end
