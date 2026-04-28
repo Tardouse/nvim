@@ -39,6 +39,7 @@ if vim.fn.has("clipboard") then
 end
 
 if vim.fn.exists('$SSH_TTY') ~= 0 then
+	vim.opt.clipboard = "unnamedplus"
     vim.g.clipboard = {
         name = 'osc52',
         copy = {
