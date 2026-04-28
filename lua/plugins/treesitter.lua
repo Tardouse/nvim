@@ -144,7 +144,7 @@ return {
 			end
 
 			vim.schedule(function()
-				pcall(treesitter.install, ensure_installed, { summary = true })
+				pcall(treesitter.install, ensure_installed, { summary = false })
 			end)
 		end,
 	},
