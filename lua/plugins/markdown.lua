@@ -1,6 +1,7 @@
 return {
 	{
 		"Tardouse/md-tool.nvim",
+        -- dir="/home/jesse/Code/md-tool.nvim",
 		ft = { "markdown" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -215,8 +216,8 @@ return {
 							aliyun = {
 								accessKeyId = "",
 								accessKeySecret = "",
-								bucket = "picture-for-upload",
-								area = "oss-cn-beijing",
+								bucket = "",
+								area = "",
 								path = "markdown/",
 								customUrl = "",
 								options = "",
@@ -249,7 +250,7 @@ return {
 			toc = {
 				-- [CN] 保存文件时是否自动更新现有 TOC。
 				-- [CN] 可选值: `true` / `false`。
-				auto_update_on_save = true,
+				auto_update_on_save = false,
 
 				-- [CN] TOC 列表项使用的无序列表符号。
 				-- [CN] 可选值: `"-"`、`"*"`、`"+"`。

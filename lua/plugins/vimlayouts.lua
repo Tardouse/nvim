@@ -24,7 +24,8 @@ return {
 				options = {
 					icons_enabled = true,
 					-- theme = 'dracula-nvim',
-					theme = "catppuccin-nvim",
+					-- theme = "catppuccin-nvim",
+					theme = "tokyonight",
 					-- theme = 'auto',
 					-- component_separators = { left = '', right = '' },
 					-- section_separators = { left = '', right = '' },

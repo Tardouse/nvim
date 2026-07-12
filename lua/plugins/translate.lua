@@ -7,7 +7,7 @@ return {
 		{ "<leader>ts", "<cmd>Translate<cr>", mode = { "n", "v" }, desc = "Translate" },
 	},
 	opts = {
-		backend = "google", -- openai, gemini, claude, deepseek
+		backend = "google", -- google (google translator), openai, gemini, claude, deepseek
         default_target_lang = "zh-CN",
 		backends = {
 			openai = {
