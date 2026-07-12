@@ -50,7 +50,6 @@ require("lazy").setup({
 	-- require("plugins.ranger"),
 	require("plugins.copilot"),
 	require("plugins.translate"),
-	require("plugins.fun"),
 	require("plugins.tagbar"),
 }, {
 	-- install = {
