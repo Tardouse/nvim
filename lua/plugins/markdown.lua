@@ -214,10 +214,10 @@ return {
 						picBed = {
 							current = "aliyun",
 							aliyun = {
-								accessKeyId = "",
-								accessKeySecret = "",
-								bucket = "",
-								area = "",
+								accessKeyId = "xxxxxxxxxxxxxxxxxxxxxxxx",
+								accessKeySecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+								bucket = "xxxxxxxxxxxxxxxxxx",
+								area = "xxxxxxxxxxxxxx",
 								path = "markdown/",
 								customUrl = "",
 								options = "",
@@ -315,6 +315,7 @@ return {
 			{ "<leader>ml", "<cmd>MDTlistToggle<cr>", desc = "Markdown List Toggle" },
 			{ "<leader>mr", "<cmd>MDTrenderToggle<cr>", desc = "Markdown Render Toggle" },
 			{ "<leader>mu", "<cmd>MDTupload<cr>", desc = "Markdown Upload Image" },
+			{ "<leader>mi", "<cmd>MDTuploadClipboard<cr>", desc = "Markdown Upload Image from Clipboard" },
 		},
 	},
 }
