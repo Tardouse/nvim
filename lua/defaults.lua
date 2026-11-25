@@ -33,6 +33,9 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
 vim.opt.undodir = os.getenv("HOME") .. "/.local/.nvim_redo"
 vim.opt.undofile = true
 
+if vim.fn.has("clipboard") then
+	vim.opt.clipboard = "unnamedplus"
+end
 -- Setup clipboard 1
 if vim.fn.exists('$SSH_TTY') ~= 0 then
 	vim.opt.clipboard = "unnamedplus"
@@ -47,10 +50,6 @@ if vim.fn.exists('$SSH_TTY') ~= 0 then
             ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
         },
     }
-end
-
-if vim.fn.has("clipboard") then
-	vim.opt.clipboard = "unnamedplus"
 end
 
 -- Setup clipboard 2
