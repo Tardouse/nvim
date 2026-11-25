@@ -1,3 +1,4 @@
+local secrets = require("config.secrets")
 return {
 	{
 		"Tardouse/md-tool.nvim",
@@ -211,20 +212,21 @@ return {
 
 					-- [CN] 直接在插件配置里内联 PicGo 图床设置，便于脱离默认 PicGo 配置单独测试。
 					config = {
-						picBed = {
-							current = "aliyun",
-							aliyun = {
-								accessKeyId = "xxxxxxxxxxxxxxxxxxxxxxxx",
-								accessKeySecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-								bucket = "xxxxxxxxxxxxxxxxxx",
-								area = "xxxxxxxxxxxxxx",
-								path = "markdown/",
-								customUrl = "",
-								options = "",
-							},
-							uploader = "aliyun",
-							transformer = "path",
-						},
+                        picBed = secrets.picgo,
+						-- picBed = {
+						-- 	current = "",
+						-- 	aliyun = {
+						-- 		accessKeyId = "",
+						-- 		accessKeySecret = "",
+						-- 		bucket = "",
+						-- 		area = "",
+						-- 		path = "",
+						-- 		customUrl = "",
+						-- 		options = "",
+						-- 	},
+						-- 	uploader = "",
+						-- 	transformer = "",
+						-- },
 						settings = {
 							language = "zh-CN",
 						},

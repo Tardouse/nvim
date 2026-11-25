@@ -1,3 +1,4 @@
+local secrets = require("config.secrets")
 return {
     "Tardouse/translate.nvim",
 	-- dir = "/home/jesse/Code/translate.nvim",
@@ -10,11 +11,12 @@ return {
 		backend = "google", -- google (google translator), openai, gemini, claude, deepseek
         default_target_lang = "zh-CN",
 		backends = {
-			openai = {
-				api_key = "xxx",
-                url="",
-                model="gpt-5.2",
-			},
+            openai = secrets.openai,
+			-- openai = {
+			-- 	api_key = "xxx",
+                -- url="",
+                -- model="gpt-5.2",
+			-- },
 			gemini = {
 				api_key = "xxx",
                 url="",
